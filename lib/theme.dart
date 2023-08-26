@@ -22,7 +22,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
   ColorScheme _buildColorScheme(Brightness brightness) {
     return ColorScheme.fromSeed(
       brightness: brightness,
-      seedColor: Color.fromARGB(255, 108, 0, 186),
+      seedColor: const Color(0xFF6C00BA),
     );
   }
 

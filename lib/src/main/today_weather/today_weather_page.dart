@@ -71,6 +71,8 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
 }
 
 class TabsNavigationBar extends StatelessWidget implements PreferredSizeWidget {
+  const TabsNavigationBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
