@@ -15,12 +15,14 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTheme();
+    const theme = AppTheme();
+    
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
       theme: theme.buildLight(),
       darkTheme: theme.buildDark(),
       locale: const Locale('ar'),
+      themeMode: ThemeMode.dark,
       title: 'Localizations Sample App',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

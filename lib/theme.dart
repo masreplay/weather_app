@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AppTheme extends ThemeExtension<AppTheme> {
+class AppTheme {
+  const AppTheme();
   ThemeData _build(Brightness brightness) {
     return ThemeData(
       useMaterial3: true,
@@ -28,16 +29,5 @@ class AppTheme extends ThemeExtension<AppTheme> {
 
   TextTheme _buildTextTheme() {
     return GoogleFonts.ibmPlexSansArabicTextTheme();
-  }
-
-  @override
-  ThemeExtension<AppTheme> copyWith() {
-    return this;
-  }
-
-  @override
-  ThemeExtension<AppTheme> lerp(
-      covariant ThemeExtension<AppTheme>? other, double t) {
-    return this;
   }
 }

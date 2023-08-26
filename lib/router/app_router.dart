@@ -29,6 +29,10 @@ class AppRouter extends _$AppRouter {
           ),
         ],
       ),
+      AutoRoute(
+        page: SearchRoute.page,
+        path: "search",
+      ),
     ];
   }
 }
