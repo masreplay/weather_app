@@ -20,6 +20,7 @@ class _MainAppState extends State<MainApp> {
       routerConfig: _appRouter.config(),
       theme: theme.buildLight(),
       darkTheme: theme.buildDark(),
+      locale: const Locale('ar'),
       title: 'Localizations Sample App',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

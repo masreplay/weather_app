@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme extends ThemeExtension<AppTheme> {
   ThemeData _build(Brightness brightness) {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
+      textTheme: _buildTextTheme(),
       colorScheme: _buildColorScheme(brightness),
     );
   }
@@ -22,6 +24,10 @@ class AppTheme extends ThemeExtension<AppTheme> {
       brightness: brightness,
       seedColor: Colors.purple,
     );
+  }
+
+  TextTheme _buildTextTheme() {
+    return GoogleFonts.ibmPlexSansArabicTextTheme();
   }
 
   @override

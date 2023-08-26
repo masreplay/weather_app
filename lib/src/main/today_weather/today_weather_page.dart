@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/common_lib.dart';
 
@@ -18,58 +19,28 @@ class _TodayWeatherPageState extends State<TodayWeatherPage> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: theme.colorScheme.primary,
+            backgroundColor: theme.colorScheme.surfaceVariant,
+            foregroundColor: Colors.white,
             pinned: true,
             actions: [
               IconButton(
-                onPressed: () {
-                  context.router.pushNativeRoute(MaterialPageRoute(
-                    builder: (context) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          title: const Text("implement"),
-                        ),
-                      );
-                    },
-                  ));
-                },
-                icon: const Icon(
-                  Icons.notifications_outlined,
-                ),
-              )
-            ],
-            title: Container(
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary,
-                borderRadius: BorderRadius.circular(8),
+                onPressed: () {},
+                icon: const Icon(Icons.search),
               ),
-              child: const Text("Iraq Baghdad"),
-            ),
-            expandedHeight: 300,
+            ],
+            title: const Text("بغداد العراق"),
+            expandedHeight: MediaQuery.sizeOf(context).height / 2,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.parallax,
-              background: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                      ),
-                    ),
-                    const Gap(12),
-                  ],
-                ),
+              background: CachedNetworkImage(
+                imageUrl:
+                    "https://lh3.googleusercontent.com/u/0/drive-viewer/AITFw-wIczn1LqSHFIeQbt-_X0NsDh2DgT-5x2tWqoFnPNLZ6LzQZPaIvWgzS5DM5QQQ1LJjpmcTyGQGvZ6yWb08PS3YPUSs=w1592-h1720",
+                fit: BoxFit.cover,
               ),
             ),
           ),
           const SliverGap(12),
-          SliverFillRemaining(),
+          const SliverFillRemaining(),
         ],
       ),
     );
