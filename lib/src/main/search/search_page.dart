@@ -11,66 +11,62 @@ Future<List<Place>> search(SearchRef ref, SearchQueries queries) {
   return ref.read(searchRepositoryProvider).search(queries);
 }
 
-@RoutePage()
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
-
-  @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-
 class SearchAppBar extends ConsumerWidget {
   const SearchAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-
-    return SearchAnchor(builder: (context, controller) {
-      return SearchBar(
-        elevation: const MaterialStatePropertyAll(0),
-        controller: controller,
-        padding: const MaterialStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 16.0),
-        ),
-        onTap: () => controller.openView(),
-        onChanged: (_) => controller.openView(),
-        leading: const Icon(Icons.search),
-        trailing: <Widget>[
-          HookConsumer(
-            builder: (context, ref, child) {
-              final settings = ref.watch(settingsPreferenceProvider);
-              final isLightTheme = settings.themeMode == ThemeMode.light;
-              return IconButton(
-                isSelected: isLightTheme,
-                tooltip: isLightTheme ? l10n.lightMode : l10n.darkMode,
-                icon: const Icon(Icons.wb_sunny_outlined),
-                selectedIcon: const Icon(Icons.brightness_2_outlined),
-                onPressed: () {
-                  ref.read(settingsPreferenceProvider.notifier).toggleThemeMode(
-                        MediaQuery.platformBrightnessOf(context),
-                      );
-                },
-              );
-            },
-          )
-        ],
-      );
-    }, suggestionsBuilder: (context, controller) {
-      return List<ListTile>.generate(5, (int index) {
-        final String item = 'item $index';
-        return ListTile(
-          title: Text(item),
-          onTap: () {},
+    return SearchAnchor(
+      builder: (context, controller) {
+        return SearchBar(
+          controller: controller,
+          padding: const MaterialStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 16.0),
+          ),
+          onTap: () => controller.openView(),
+          onChanged: (_) => controller.openView(),
+          leading: const Icon(Icons.search),
+          trailing: const [ThemeIconButton()],
         );
-      });
-    });
+      },
+      suggestionsBuilder: (context, controller) async {
+        // Use .future to read the state of a FutureProvider
+        // and throw an error if the future is not completed.
+        final state = await ref.read(
+          searchProvider(SearchQueries(q: controller.text)).future,
+        );
+
+        return List.generate(state.length, (index) {
+          final place = state[index];
+
+          return ListTile(
+            title: Text(place.name),
+          );
+        });
+      },
+    );
+  }
+}
+
+class ThemeIconButton extends ConsumerWidget {
+  const ThemeIconButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    final settings = ref.watch(settingsPreferenceProvider);
+    final isLightTheme = settings.themeMode == ThemeMode.light;
+
+    return IconButton(
+      isSelected: isLightTheme,
+      tooltip: isLightTheme ? l10n.lightMode : l10n.darkMode,
+      icon: const Icon(Icons.wb_sunny_outlined),
+      selectedIcon: const Icon(Icons.brightness_2_outlined),
+      onPressed: () {
+        ref.read(settingsPreferenceProvider.notifier).toggleThemeMode(
+              MediaQuery.platformBrightnessOf(context),
+            );
+      },
+    );
   }
 }

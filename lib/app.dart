@@ -1,28 +1,32 @@
 import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/router/app_router.dart';
+import 'package:weather_app/src/settings/settings_provider.dart';
 
 import 'theme.dart';
 
-class MainApp extends StatefulWidget {
+class MainApp extends StatefulHookConsumerWidget {
   const MainApp({super.key});
 
   @override
-  State<MainApp> createState() => _MainAppState();
+  ConsumerState<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> {
+class _MainAppState extends ConsumerState<MainApp> {
   final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     const theme = AppTheme();
-    
+
+    /// Force repaint the entire tree when change
+    final settings = ref.watch(settingsPreferenceProvider);
+
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
       theme: theme.buildLight(),
       darkTheme: theme.buildDark(),
-      locale: const Locale('ar'),
-      themeMode: ThemeMode.dark,
+      locale: settings.locale,
+      themeMode: settings.themeMode,
       title: 'Localizations Sample App',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

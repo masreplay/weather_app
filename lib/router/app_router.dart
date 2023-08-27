@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:weather_app/src/main/forecast_weather/forecast_weather_page.dart';
 import 'package:weather_app/src/main/main_page.dart';
-import 'package:weather_app/src/main/search/search_page.dart';
 import 'package:weather_app/src/main/today_weather/today_weather_page.dart';
 import 'package:weather_app/src/main/tomorrow_weather/tomorrow_weather_page.dart';
 
@@ -29,10 +28,6 @@ class AppRouter extends _$AppRouter {
             path: "forecast",
           ),
         ],
-      ),
-      AutoRoute(
-        page: SearchRoute.page,
-        path: "/search",
       ),
     ];
   }
