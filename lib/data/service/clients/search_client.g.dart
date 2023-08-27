@@ -94,3 +94,24 @@ class _SearchClient implements SearchClient {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$searchClientHash() => r'7eb49426f8bf42e0a1a25b979fd252abb79efe33';
+
+/// See also [searchClient].
+@ProviderFor(searchClient)
+final searchClientProvider = AutoDisposeProvider<SearchClient>.internal(
+  searchClient,
+  name: r'searchClientProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$searchClientHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SearchClientRef = AutoDisposeProviderRef<SearchClient>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
