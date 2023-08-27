@@ -42,7 +42,11 @@ Json? _$JsonConverterToJson<Json, Value>(
 String _$settingsPreferenceHash() =>
     r'eaee9f606977f772d7a60f6d68fec504ced914cc';
 
-/// See also [SettingsPreference].
+/// Cache [AppSettings] as Json and reload it when app starts
+///
+/// with the help of [PersistanceProvider]
+///
+/// Copied from [SettingsPreference].
 @ProviderFor(SettingsPreference)
 final settingsPreferenceProvider =
     AutoDisposeNotifierProvider<SettingsPreference, AppSettings>.internal(

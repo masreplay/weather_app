@@ -6,11 +6,12 @@ import 'package:weather_app/src/settings/settings_provider.dart';
 
 part 'search_page.g.dart';
 
+/// A [FutureProvider] that return a new [List<Place>] depend on [SearchQueries].
 @riverpod
-Future<List<Place>> search(SearchRef ref, SearchQueries queries) {
-  return ref.read(searchRepositoryProvider).search(queries);
-}
+Future<List<Place>> search(SearchRef ref, SearchQueries queries) =>
+    ref.read(searchRepositoryProvider).search(queries);
 
+/// A widget that exposes a [SearchAnchorController].
 class SearchAppBar extends ConsumerWidget {
   const SearchAppBar({super.key});
 

@@ -6,7 +6,7 @@ part of 'search_page.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchHash() => r'948c77c0d989d74862fa79fa4de36812d838e713';
+String _$searchHash() => r'4ed9e37a96e237e951f16add7adc42a1ee16cda8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,16 +31,24 @@ class _SystemHash {
 
 typedef SearchRef = AutoDisposeFutureProviderRef<List<Place>>;
 
-/// See also [search].
+/// A [FutureProvider] that return a new [List<Place>] depend on [SearchQueries].
+///
+/// Copied from [search].
 @ProviderFor(search)
 const searchProvider = SearchFamily();
 
-/// See also [search].
+/// A [FutureProvider] that return a new [List<Place>] depend on [SearchQueries].
+///
+/// Copied from [search].
 class SearchFamily extends Family<AsyncValue<List<Place>>> {
-  /// See also [search].
+  /// A [FutureProvider] that return a new [List<Place>] depend on [SearchQueries].
+  ///
+  /// Copied from [search].
   const SearchFamily();
 
-  /// See also [search].
+  /// A [FutureProvider] that return a new [List<Place>] depend on [SearchQueries].
+  ///
+  /// Copied from [search].
   SearchProvider call(
     SearchQueries queries,
   ) {
@@ -73,9 +81,13 @@ class SearchFamily extends Family<AsyncValue<List<Place>>> {
   String? get name => r'searchProvider';
 }
 
-/// See also [search].
+/// A [FutureProvider] that return a new [List<Place>] depend on [SearchQueries].
+///
+/// Copied from [search].
 class SearchProvider extends AutoDisposeFutureProvider<List<Place>> {
-  /// See also [search].
+  /// A [FutureProvider] that return a new [List<Place>] depend on [SearchQueries].
+  ///
+  /// Copied from [search].
   SearchProvider(
     this.queries,
   ) : super.internal(
