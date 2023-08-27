@@ -158,7 +158,7 @@ class TabButton extends StatelessWidget {
             : theme.colorScheme.onSurface,
       ),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: selected
