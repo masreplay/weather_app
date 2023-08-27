@@ -2,7 +2,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/src/main/sliver_header.dart';
-import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
+import 'package:weather_app/src/main/forecast_provider.dart';
 import 'package:weather_app/src/widgets/flex_padded.dart';
 import 'package:weather_app/theme.dart';
 
@@ -19,6 +19,7 @@ class MainPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useScrollController();
+    final provider = forecastProviderProvider;
 
     final routes = _getRoutes(context);
 
@@ -29,7 +30,7 @@ class MainPage extends HookConsumerWidget {
 
         return Scaffold(
           body: RefreshIndicator(
-            onRefresh: () => ref.refresh(getTodayForecastProvider.future),
+            onRefresh: () => ref.refresh(provider.future),
             child: CustomScrollView(
               controller: controller,
               slivers: [

@@ -22,6 +22,7 @@ ForecastQueries _$ForecastQueriesFromJson(Map<String, dynamic> json) {
 mixin _$ForecastQueries {
 // London
   String? get q => throw _privateConstructorUsedError;
+  int get days => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $ForecastQueriesCopyWith<$Res> {
           ForecastQueries value, $Res Function(ForecastQueries) then) =
       _$ForecastQueriesCopyWithImpl<$Res, ForecastQueries>;
   @useResult
-  $Res call({String? q});
+  $Res call({String? q, int days});
 }
 
 /// @nodoc
@@ -52,12 +53,17 @@ class _$ForecastQueriesCopyWithImpl<$Res, $Val extends ForecastQueries>
   @override
   $Res call({
     Object? q = freezed,
+    Object? days = null,
   }) {
     return _then(_value.copyWith(
       q: freezed == q
           ? _value.q
           : q // ignore: cast_nullable_to_non_nullable
               as String?,
+      days: null == days
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$_ForecastQueriesCopyWith<$Res>
       __$$_ForecastQueriesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? q});
+  $Res call({String? q, int days});
 }
 
 /// @nodoc
@@ -85,12 +91,17 @@ class __$$_ForecastQueriesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? q = freezed,
+    Object? days = null,
   }) {
     return _then(_$_ForecastQueries(
       q: freezed == q
           ? _value.q
           : q // ignore: cast_nullable_to_non_nullable
               as String?,
+      days: null == days
+          ? _value.days
+          : days // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -99,7 +110,7 @@ class __$$_ForecastQueriesCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$_ForecastQueries implements _ForecastQueries {
-  _$_ForecastQueries({this.q});
+  _$_ForecastQueries({this.q, this.days = 5});
 
   factory _$_ForecastQueries.fromJson(Map<String, dynamic> json) =>
       _$$_ForecastQueriesFromJson(json);
@@ -107,10 +118,13 @@ class _$_ForecastQueries implements _ForecastQueries {
 // London
   @override
   final String? q;
+  @override
+  @JsonKey()
+  final int days;
 
   @override
   String toString() {
-    return 'ForecastQueries(q: $q)';
+    return 'ForecastQueries(q: $q, days: $days)';
   }
 
   @override
@@ -118,12 +132,13 @@ class _$_ForecastQueries implements _ForecastQueries {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ForecastQueries &&
-            (identical(other.q, q) || other.q == q));
+            (identical(other.q, q) || other.q == q) &&
+            (identical(other.days, days) || other.days == days));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, q);
+  int get hashCode => Object.hash(runtimeType, q, days);
 
   @JsonKey(ignore: true)
   @override
@@ -140,13 +155,16 @@ class _$_ForecastQueries implements _ForecastQueries {
 }
 
 abstract class _ForecastQueries implements ForecastQueries {
-  factory _ForecastQueries({final String? q}) = _$_ForecastQueries;
+  factory _ForecastQueries({final String? q, final int days}) =
+      _$_ForecastQueries;
 
   factory _ForecastQueries.fromJson(Map<String, dynamic> json) =
       _$_ForecastQueries.fromJson;
 
   @override // London
   String? get q;
+  @override
+  int get days;
   @override
   @JsonKey(ignore: true)
   _$$_ForecastQueriesCopyWith<_$_ForecastQueries> get copyWith =>

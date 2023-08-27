@@ -4,7 +4,7 @@ import 'package:weather_app/data/service/models/forecast.dart';
 import 'package:weather_app/data/service/models/temperature_unit.dart';
 import 'package:weather_app/date_time.dart';
 import 'package:weather_app/l10n/localization.dart';
-import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
+import 'package:weather_app/src/main/forecast_provider.dart';
 import 'package:weather_app/src/settings/settings_provider.dart';
 import 'package:weather_app/src/widgets/data_list_tile.dart';
 import 'package:weather_app/src/widgets/default_error_widget.dart';
@@ -22,8 +22,31 @@ class TodayWeatherPage extends StatefulHookConsumerWidget {
 class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
   @override
   Widget build(BuildContext context) {
-    final provider = getTodayForecastProvider;
+    final provider = forecastProviderProvider;
     final state = ref.watch(provider);
+
+    return state.when(
+      data: (data) => ForecastBody(data.forecast.forecastday.first),
+      error: (error, stackTrace) => DefaultErrorWidget(
+        error: error,
+        stackTrace: stackTrace,
+        refresh: () => ref.refresh(provider),
+      ),
+      loading: DefaultLoadingWidget.new,
+    );
+  }
+}
+
+class ForecastBody extends HookConsumerWidget {
+  const ForecastBody(
+    this.forecast, {
+    super.key,
+  });
+
+  final ForecastDay forecast;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
 
     final settings = ref.watch(settingsPreferenceProvider);
@@ -37,90 +60,77 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
       crossAxisSpacing: gutter,
       mainAxisSpacing: gutter,
     );
-
-    return state.when(
-      data: (data) {
-        final forecast = data.forecast.forecastday.first;
-
-        return ListView(
+    return ListView(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(
+        horizontal: gutter,
+        vertical: Insets.small,
+      ),
+      children: [
+        GridView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(
-            horizontal: gutter,
-            vertical: Insets.small,
-          ),
+          padding: EdgeInsets.zero,
+          gridDelegate: gridDelegate,
           children: [
-            GridView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              gridDelegate: gridDelegate,
-              children: [
-                ItemListTile(
-                  title: Text(l10n.windSpeed),
-                  icon: Icons.air_outlined,
-                  subtitle: Text(
-                    l10n.speed(unitType, data.current.getWindSpeed),
-                  ),
-                ),
-                ItemListTile(
-                  title: Text(l10n.uvIndex),
-                  icon: Icons.wb_sunny_outlined,
-                  subtitle: Text("${data.current.uv}"),
-                ),
-                ItemListTile(
-                  title: Text(l10n.gust),
-                  icon: Icons.wind_power_outlined,
-                  subtitle: Text(
-                    l10n.speed(unitType, data.current.getGust),
-                  ),
-                ),
-                ItemListTile(
-                  title: Text(l10n.visibility),
-                  icon: Icons.visibility_outlined,
-                  subtitle: Text(
-                    l10n.speed(unitType, data.current.getVisibility),
-                  ),
-                ),
-              ],
+            ItemListTile(
+              title: Text(l10n.windSpeed),
+              icon: Icons.air_outlined,
+              subtitle: Text(
+                l10n.speed(unitType, forecast.day.maxWind),
+              ),
             ),
-            const Gap(16),
-            HourlyForecastListTile(
-              hours: forecast.hour,
-              unitType: unitType,
+            ItemListTile(
+              title: Text(l10n.uvIndex),
+              icon: Icons.wb_sunny_outlined,
+              subtitle: Text("${forecast.day.uv}"),
             ),
-            const Gap(16),
-            GridView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              gridDelegate: gridDelegate,
-              children: [
-                ItemListTile(
-                  title: Text(l10n.sunrise),
-                  icon: Icons.nights_stay_outlined,
-                  subtitle: Text(
-                    forecast.astro.sunrise.toDateTime().formatHour(),
-                  ),
-                ),
-                ItemListTile(
-                  title: Text(l10n.sunset),
-                  icon: Icons.wb_sunny_outlined,
-                  subtitle: Text(
-                    forecast.astro.sunset.toDateTime().formatHour(),
-                  ),
-                ),
-              ],
+            ItemListTile(
+              title: Text(l10n.snow),
+              icon: Icons.wind_power_outlined,
+              subtitle: Text(
+                l10n.speed(unitType, forecast.day.totalSnow),
+              ),
+            ),
+            ItemListTile(
+              title: Text(l10n.visibility),
+              icon: Icons.visibility_outlined,
+              subtitle: Text(
+                l10n.speed(unitType, forecast.day.avgVisibility),
+              ),
             ),
           ],
-        );
-      },
-      error: (error, stackTrace) => DefaultErrorWidget(
-        error: error,
-        stackTrace: stackTrace,
-        refresh: () => ref.refresh(provider),
-      ),
-      loading: DefaultLoadingWidget.new,
+        ),
+        const Gap(16),
+        HourlyForecastListTile(
+          hours: forecast.hour,
+          unitType: unitType,
+        ),
+        const Gap(16),
+        GridView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
+          gridDelegate: gridDelegate,
+          children: [
+            ItemListTile(
+              title: Text(l10n.sunrise),
+              icon: Icons.nights_stay_outlined,
+              subtitle: Text(
+                forecast.astro.sunrise.toDateTime().formatHour(),
+              ),
+            ),
+            ItemListTile(
+              title: Text(l10n.sunset),
+              icon: Icons.wb_sunny_outlined,
+              subtitle: Text(
+                forecast.astro.sunset.toDateTime().formatHour(),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -158,7 +168,7 @@ class HourlyForecastListTile extends StatelessWidget {
                   style: theme.textTheme.bodyMedium,
                 ),
                 CachedNetworkImage(
-                  imageUrl: item.condition.image(),
+                  imageUrl: item.condition.getImage(),
                   width: 64,
                   height: 64,
                 ),

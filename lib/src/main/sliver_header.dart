@@ -9,7 +9,7 @@ import 'package:weather_app/gen/assets.gen.dart';
 import 'package:weather_app/l10n/localization.dart';
 import 'package:weather_app/src/main/main_page.dart';
 import 'package:weather_app/src/main/search/search_page.dart';
-import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
+import 'package:weather_app/src/main/forecast_provider.dart';
 import 'package:weather_app/src/settings/settings_provider.dart';
 import 'package:weather_app/src/widgets/flex_padded.dart';
 import 'package:weather_app/theme.dart';
@@ -185,7 +185,7 @@ class CurrentWeatherSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = getTodayForecastProvider;
+    final provider = forecastProviderProvider;
     final state = ref.watch(provider);
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
@@ -235,7 +235,7 @@ class CurrentWeatherSection extends ConsumerWidget {
                               shape: BoxShape.circle,
                             ),
                             child: CachedNetworkImage(
-                              imageUrl: data.current.condition.image(),
+                              imageUrl: data.current.condition.getImage(),
                               height: 72,
                               width: 72,
                             ),

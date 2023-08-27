@@ -9,11 +9,13 @@ part of 'forecast_client.dart';
 _$_ForecastQueries _$$_ForecastQueriesFromJson(Map<String, dynamic> json) =>
     _$_ForecastQueries(
       q: json['q'] as String?,
+      days: json['days'] as int? ?? 5,
     );
 
 Map<String, dynamic> _$$_ForecastQueriesToJson(_$_ForecastQueries instance) =>
     <String, dynamic>{
       'q': instance.q,
+      'days': instance.days,
     };
 
 // **************************************************************************

@@ -117,7 +117,7 @@ class Condition with _$Condition {
     required int code,
   }) = _Condition;
 
-  String image() => "https:${icon.replaceAll("64", "128")}";
+  String getImage() => "https:${icon.replaceAll("64", "128")}";
 
   factory Condition.fromJson(Map<String, dynamic> json) =>
       _$ConditionFromJson(json);

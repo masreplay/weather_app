@@ -29,6 +29,7 @@ class ForecastQueries with _$ForecastQueries {
   factory ForecastQueries({
     // London
     String? q,
+    @Default(5) int days,
   }) = _ForecastQueries;
 
   factory ForecastQueries.fromJson(Map<String, dynamic> json) =>
