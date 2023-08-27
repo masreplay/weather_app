@@ -49,6 +49,7 @@ class _MainAppState extends ConsumerState<MainApp> {
     final settings = ref.watch(settingsPreferenceProvider);
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: _appRouter.config(),
       theme: theme.buildLight(),
       darkTheme: theme.buildDark(),

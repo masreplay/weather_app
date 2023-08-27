@@ -7,6 +7,7 @@ import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/data/service/models/temperature_unit.dart';
 import 'package:weather_app/gen/assets.gen.dart';
 import 'package:weather_app/l10n/localization.dart';
+import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/src/main/main_page.dart';
 import 'package:weather_app/src/main/search/search_page.dart';
 import 'package:weather_app/src/main/forecast_provider.dart';
@@ -57,7 +58,9 @@ class SliverHeader extends HookConsumerWidget {
       pinned: true,
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            context.router.push(const SettingsRoute());
+          },
           icon: const Icon(Icons.settings),
         )
       ],

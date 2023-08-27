@@ -106,7 +106,9 @@ class NavigationTabsDelegate extends SliverPersistentHeaderDelegate {
             child: TabButton(
               selected: router.activeIndex == index,
               text: Text(route.label),
-              onTap: () => router.setActiveIndex(index),
+              onTap: () {
+                router.setActiveIndex(index);
+              },
             ),
           );
         }),
@@ -121,5 +123,5 @@ class NavigationTabsDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => 72;
 
   @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }

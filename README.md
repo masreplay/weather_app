@@ -1,11 +1,16 @@
-### tasks
+### The Weather App
+Please the TODO.md file for task details
 
-1- Starting by building the basic structure of the project
-  - Navigation
-  - API client 
-  - Repository
-  - SM Riverpod
+## Requirements
+- To run the app on Android just run the following command in the root directory of the project:
+```
+flutter run
+```
+
+- or to build
+```
+flutter build apk
+```
 
 
-
-This Application is not feature-based, but layer-based, so I will start by building the basic structure of the project, and then I will start to build the features.
+## Screenshots

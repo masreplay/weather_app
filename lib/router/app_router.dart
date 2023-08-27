@@ -3,9 +3,11 @@ import 'package:weather_app/src/main/forecast_weather/forecast_weather_page.dart
 import 'package:weather_app/src/main/main_page.dart';
 import 'package:weather_app/src/main/today_weather/today_weather_page.dart';
 import 'package:weather_app/src/main/tomorrow_weather/tomorrow_weather_page.dart';
+import 'package:weather_app/src/settings/settings_page.dart';
 
 part 'app_router.gr.dart';
 
+/// There is no reason to guard any route in this app
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
 class AppRouter extends _$AppRouter {
   @override
@@ -29,6 +31,10 @@ class AppRouter extends _$AppRouter {
           ),
         ],
       ),
+      AutoRoute(
+        page: SettingsRoute.page,
+        path: "/settings",
+      )
     ];
   }
 }
