@@ -2274,10 +2274,10 @@ Astro _$AstroFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Astro {
-  String get sunrise => throw _privateConstructorUsedError;
-  String get sunset => throw _privateConstructorUsedError;
-  String get moonrise => throw _privateConstructorUsedError;
-  String get moonset => throw _privateConstructorUsedError;
+  TimeOfDay get sunrise => throw _privateConstructorUsedError;
+  TimeOfDay get sunset => throw _privateConstructorUsedError;
+  TimeOfDay get moonrise => throw _privateConstructorUsedError;
+  TimeOfDay get moonset => throw _privateConstructorUsedError;
   String get moonPhase => throw _privateConstructorUsedError;
   String get moonIllumination => throw _privateConstructorUsedError;
   int get isMoonUp => throw _privateConstructorUsedError;
@@ -2294,10 +2294,10 @@ abstract class $AstroCopyWith<$Res> {
       _$AstroCopyWithImpl<$Res, Astro>;
   @useResult
   $Res call(
-      {String sunrise,
-      String sunset,
-      String moonrise,
-      String moonset,
+      {TimeOfDay sunrise,
+      TimeOfDay sunset,
+      TimeOfDay moonrise,
+      TimeOfDay moonset,
       String moonPhase,
       String moonIllumination,
       int isMoonUp,
@@ -2330,19 +2330,19 @@ class _$AstroCopyWithImpl<$Res, $Val extends Astro>
       sunrise: null == sunrise
           ? _value.sunrise
           : sunrise // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       sunset: null == sunset
           ? _value.sunset
           : sunset // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       moonrise: null == moonrise
           ? _value.moonrise
           : moonrise // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       moonset: null == moonset
           ? _value.moonset
           : moonset // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       moonPhase: null == moonPhase
           ? _value.moonPhase
           : moonPhase // ignore: cast_nullable_to_non_nullable
@@ -2370,10 +2370,10 @@ abstract class _$$_AstroCopyWith<$Res> implements $AstroCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String sunrise,
-      String sunset,
-      String moonrise,
-      String moonset,
+      {TimeOfDay sunrise,
+      TimeOfDay sunset,
+      TimeOfDay moonrise,
+      TimeOfDay moonset,
       String moonPhase,
       String moonIllumination,
       int isMoonUp,
@@ -2402,19 +2402,19 @@ class __$$_AstroCopyWithImpl<$Res> extends _$AstroCopyWithImpl<$Res, _$_Astro>
       sunrise: null == sunrise
           ? _value.sunrise
           : sunrise // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       sunset: null == sunset
           ? _value.sunset
           : sunset // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       moonrise: null == moonrise
           ? _value.moonrise
           : moonrise // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       moonset: null == moonset
           ? _value.moonset
           : moonset // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TimeOfDay,
       moonPhase: null == moonPhase
           ? _value.moonPhase
           : moonPhase // ignore: cast_nullable_to_non_nullable
@@ -2437,7 +2437,10 @@ class __$$_AstroCopyWithImpl<$Res> extends _$AstroCopyWithImpl<$Res, _$_Astro>
 
 /// @nodoc
 
-@jsonSerializable
+@JsonSerializable(
+    fieldRename: FieldRename.snake,
+    explicitToJson: true,
+    converters: [TimeOfDayJsonConverter()])
 class _$_Astro extends _Astro {
   _$_Astro(
       {required this.sunrise,
@@ -2454,13 +2457,13 @@ class _$_Astro extends _Astro {
       _$$_AstroFromJson(json);
 
   @override
-  final String sunrise;
+  final TimeOfDay sunrise;
   @override
-  final String sunset;
+  final TimeOfDay sunset;
   @override
-  final String moonrise;
+  final TimeOfDay moonrise;
   @override
-  final String moonset;
+  final TimeOfDay moonset;
   @override
   final String moonPhase;
   @override
@@ -2515,10 +2518,10 @@ class _$_Astro extends _Astro {
 
 abstract class _Astro extends Astro {
   factory _Astro(
-      {required final String sunrise,
-      required final String sunset,
-      required final String moonrise,
-      required final String moonset,
+      {required final TimeOfDay sunrise,
+      required final TimeOfDay sunset,
+      required final TimeOfDay moonrise,
+      required final TimeOfDay moonset,
       required final String moonPhase,
       required final String moonIllumination,
       required final int isMoonUp,
@@ -2528,13 +2531,13 @@ abstract class _Astro extends Astro {
   factory _Astro.fromJson(Map<String, dynamic> json) = _$_Astro.fromJson;
 
   @override
-  String get sunrise;
+  TimeOfDay get sunrise;
   @override
-  String get sunset;
+  TimeOfDay get sunset;
   @override
-  String get moonrise;
+  TimeOfDay get moonrise;
   @override
-  String get moonset;
+  TimeOfDay get moonset;
   @override
   String get moonPhase;
   @override

@@ -187,10 +187,13 @@ Map<String, dynamic> _$$_DayToJson(_$_Day instance) => <String, dynamic>{
     };
 
 _$_Astro _$$_AstroFromJson(Map<String, dynamic> json) => _$_Astro(
-      sunrise: json['sunrise'] as String,
-      sunset: json['sunset'] as String,
-      moonrise: json['moonrise'] as String,
-      moonset: json['moonset'] as String,
+      sunrise:
+          const TimeOfDayJsonConverter().fromJson(json['sunrise'] as String),
+      sunset: const TimeOfDayJsonConverter().fromJson(json['sunset'] as String),
+      moonrise:
+          const TimeOfDayJsonConverter().fromJson(json['moonrise'] as String),
+      moonset:
+          const TimeOfDayJsonConverter().fromJson(json['moonset'] as String),
       moonPhase: json['moon_phase'] as String,
       moonIllumination: json['moon_illumination'] as String,
       isMoonUp: json['is_moon_up'] as int,
@@ -198,10 +201,10 @@ _$_Astro _$$_AstroFromJson(Map<String, dynamic> json) => _$_Astro(
     );
 
 Map<String, dynamic> _$$_AstroToJson(_$_Astro instance) => <String, dynamic>{
-      'sunrise': instance.sunrise,
-      'sunset': instance.sunset,
-      'moonrise': instance.moonrise,
-      'moonset': instance.moonset,
+      'sunrise': const TimeOfDayJsonConverter().toJson(instance.sunrise),
+      'sunset': const TimeOfDayJsonConverter().toJson(instance.sunset),
+      'moonrise': const TimeOfDayJsonConverter().toJson(instance.moonrise),
+      'moonset': const TimeOfDayJsonConverter().toJson(instance.moonset),
       'moon_phase': instance.moonPhase,
       'moon_illumination': instance.moonIllumination,
       'is_moon_up': instance.isMoonUp,

@@ -1,5 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:weather_app/common_lib.dart';
+import 'package:weather_app/data/service/models/forecast.dart';
+import 'package:weather_app/data/service/models/temperature_unit.dart';
+import 'package:weather_app/date_time.dart';
 import 'package:weather_app/src/main/flex_padded.dart';
+import 'package:weather_app/src/main/today_weather/data_list_tile.dart';
 import 'package:weather_app/src/main/today_weather/default_error_widget.dart';
 import 'package:weather_app/src/main/today_weather/default_loading_widget.dart';
 import 'package:weather_app/src/main/today_weather/localization.dart';
@@ -31,6 +36,7 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
       data: (data) {
         if (data == null) return Container();
 
+        final forecast = data.forecast.forecastday.first;
         return Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: gutter,
@@ -39,48 +45,72 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
           child: ColumnPadded(
             gap: gutter,
             children: [
-              RowPadded(
-                gap: gutter,
+              GridView(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2,
+                  crossAxisSpacing: gutter,
+                  mainAxisSpacing: gutter,
+                ),
                 children: [
-                  Expanded(
-                    child: DataListTile(
-                      title: Text(l10n.windSpeed),
-                      subtitle: Text(
-                        l10n.speed(unitType, data.current.getWindSpeed),
-                      ),
-                      icon: Icons.air_outlined,
+                  ItemListTile(
+                    title: Text(l10n.windSpeed),
+                    icon: Icons.air_outlined,
+                    subtitle: Text(
+                      l10n.speed(unitType, data.current.getWindSpeed),
                     ),
                   ),
-                  Expanded(
-                    child: DataListTile(
-                      title: Text(l10n.uvIndex),
-                      subtitle: Text(
-                        "${data.current.uv}",
-                      ),
-                      icon: Icons.wb_sunny_outlined,
+                  ItemListTile(
+                    title: Text(l10n.uvIndex),
+                    icon: Icons.wb_sunny_outlined,
+                    subtitle: Text("${data.current.uv}"),
+                  ),
+                  ItemListTile(
+                    title: Text(l10n.gust),
+                    icon: Icons.wind_power_outlined,
+                    subtitle: Text(
+                      l10n.speed(unitType, data.current.getGust),
+                    ),
+                  ),
+                  ItemListTile(
+                    title: Text(l10n.visibility),
+                    icon: Icons.visibility_outlined,
+                    subtitle: Text(
+                      l10n.speed(unitType, data.current.getVisibility),
                     ),
                   ),
                 ],
               ),
-              RowPadded(
-                gap: gutter,
+              HourlyForecastListTile(
+                hours: data.forecast.forecastday.first.hour,
+                unitType: unitType,
+              ),
+              GridView(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2,
+                  crossAxisSpacing: gutter,
+                  mainAxisSpacing: gutter,
+                ),
                 children: [
-                  Expanded(
-                    child: DataListTile(
-                      title: Text(l10n.gust),
-                      subtitle: Text(
-                        l10n.speed(unitType, data.current.getGust),
-                      ),
-                      icon: Icons.wind_power_outlined,
+                  ItemListTile(
+                    title: Text(l10n.sunrise),
+                    icon: Icons.nights_stay_outlined,
+                    subtitle: Text(
+                      forecast.astro.sunrise.toDateTime().formatHour(),
                     ),
                   ),
-                  Expanded(
-                    child: DataListTile(
-                      title: Text(l10n.visibility),
-                      subtitle: Text(
-                        l10n.speed(unitType, data.current.getVisibility),
-                      ),
-                      icon: Icons.visibility_outlined,
+                  ItemListTile(
+                    title: Text(l10n.sunset),
+                    icon: Icons.wb_sunny_outlined,
+                    subtitle: Text(
+                      forecast.astro.sunset.toDateTime().formatHour(),
                     ),
                   ),
                 ],
@@ -99,60 +129,56 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
   }
 }
 
-class DataListTile extends StatelessWidget {
-  const DataListTile({
+class HourlyForecastListTile extends StatelessWidget {
+  const HourlyForecastListTile({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.icon,
+    required this.hours,
+    required this.unitType,
   });
 
-  final Widget title;
-  final Widget subtitle;
-  final IconData icon;
+  final List<Hour> hours;
+  final UnitType unitType;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    final backgroundColor = theme.colorScheme.secondaryContainer;
-    final foregroundColor = theme.colorScheme.onSecondaryContainer;
 
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: RowPadded(
-        gap: 8,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: theme.colorScheme.primary,
-            ),
-            child: Icon(icon, color: theme.colorScheme.onPrimary),
-          ),
-          ColumnPadded(
-            gap: 0,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DefaultTextStyle(
-                style: theme.textTheme.titleMedium!.copyWith(
-                  color: foregroundColor,
+    return DataListTile(
+      title: Text(l10n.hourlyForecast),
+      icon: Icons.watch_later_outlined,
+      child: SizedBox(
+        height: 110,
+        child: ListView.separated(
+          itemCount: hours.length,
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (context, index) => const Gap(16),
+          itemBuilder: (context, index) {
+            final item = hours[index];
+            return Column(
+              children: [
+                Text(
+                  item.time.formatHour(),
+                  style: theme.textTheme.bodyMedium,
                 ),
-                child: title,
-              ),
-              DefaultTextStyle(
-                style: theme.textTheme.titleSmall!.copyWith(
-                  color: foregroundColor,
+                CachedNetworkImage(
+                  imageUrl: item.condition.image(),
+                  width: 64,
+                  height: 64,
                 ),
-                child: subtitle,
-              ),
-            ],
-          ),
-        ],
+                Text(
+                  l10n.temperature(
+                    unitType,
+                    item.getTemperature,
+                  ),
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
