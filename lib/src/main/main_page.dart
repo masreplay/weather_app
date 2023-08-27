@@ -1,10 +1,10 @@
 import 'dart:ui';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/data/service/models/temperature_unit.dart';
-import 'package:weather_app/date_time.dart';
 import 'package:weather_app/gen/assets.gen.dart';
 import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/src/main/flex_padded.dart';
@@ -13,6 +13,11 @@ import 'package:weather_app/src/main/today_weather/localization.dart';
 import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
 import 'package:weather_app/src/settings/settings_provider.dart';
 import 'package:weather_app/theme.dart';
+
+const _expandedBorderRadius = BorderRadius.only(
+  bottomLeft: Radius.circular(36),
+  bottomRight: Radius.circular(36),
+);
 
 @RoutePage()
 class MainPage extends StatelessWidget {
@@ -48,11 +53,9 @@ class MainPage extends StatelessWidget {
           final route = routes[index];
           return Expanded(
             child: TabButton(
-              onTap: () {
-                router.setActiveIndex(index);
-              },
-              text: Text(route.label),
               selected: router.activeIndex == index,
+              text: Text(route.label),
+              onTap: () => router.setActiveIndex(index),
             ),
           );
         });
@@ -61,16 +64,11 @@ class MainPage extends StatelessWidget {
           builder: (context, ref, _) {
             final scrolledTo = useState(false);
             final settings = ref.watch(settingsPreferenceProvider);
-            final collapsedHeight = MediaQuery.sizeOf(context).height / 4;
+            final collapsedHeight = MediaQuery.sizeOf(context).height / 5;
             final expandedHeight = MediaQuery.sizeOf(context).height / 2;
 
             final textColor =
                 scrolledTo.value ? theme.colorScheme.onSurface : Colors.white;
-
-            const borderRadius = BorderRadius.only(
-              bottomLeft: Radius.circular(36),
-              bottomRight: Radius.circular(36),
-            );
 
             return Scaffold(
               body: NotificationListener(
@@ -93,15 +91,21 @@ class MainPage extends StatelessWidget {
                         foregroundColor: textColor,
                         pinned: true,
                         shape: const RoundedRectangleBorder(
-                          borderRadius: borderRadius,
+                          borderRadius: _expandedBorderRadius,
                         ),
+                        actions: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.settings),
+                          )
+                        ],
                         title: SearchAppBar(
                           foregroundColor: textColor,
                         ),
                         collapsedHeight: collapsedHeight,
                         expandedHeight: expandedHeight,
                         flexibleSpace: ClipRRect(
-                          borderRadius: borderRadius,
+                          borderRadius: _expandedBorderRadius,
                           child: FlexibleSpaceBar(
                             collapseMode: CollapseMode.parallax,
                             background: Column(
@@ -110,30 +114,9 @@ class MainPage extends StatelessWidget {
                                 Expanded(
                                   child: Stack(
                                     children: [
-                                      Positioned.fill(
-                                        child: ClipRRect(
-                                          borderRadius: borderRadius,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: ExactAssetImage(
-                                                    Assets.hour.night.path),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(
-                                                  sigmaX: 10.0, sigmaY: 10.0),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: theme
-                                                      .colorScheme.background
-                                                      .withOpacity(0.0),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                      CurrentDaySection(
+                                        unitType: settings.unitType,
+                                        foregroundColor: textColor,
                                       ),
                                       CurrentWeatherSection(
                                         unitType: settings.unitType,
@@ -168,6 +151,40 @@ class MainPage extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class CurrentDaySection extends ConsumerWidget {
+  const CurrentDaySection({
+    super.key,
+    required this.unitType,
+    required this.foregroundColor,
+  });
+
+  final UnitType unitType;
+  final Color foregroundColor;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ClipRRect(
+      borderRadius: _expandedBorderRadius,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: ExactAssetImage(Assets.hour.night.path),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: foregroundColor.withOpacity(0.0),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -245,6 +262,12 @@ class CurrentWeatherSection extends ConsumerWidget {
     final state = ref.watch(provider);
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    final mediumTextStyle = textTheme.titleMedium!.copyWith(
+      color: foregroundColor,
+      fontWeight: FontWeight.bold,
+    );
 
     return SafeArea(
       child: Padding(
@@ -256,6 +279,7 @@ class CurrentWeatherSection extends ConsumerWidget {
           data: (data) {
             if (data == null) return const SizedBox.shrink();
 
+            final day = data.forecast.forecastday.first.day;
             return Column(
               children: [
                 Expanded(
@@ -266,7 +290,9 @@ class CurrentWeatherSection extends ConsumerWidget {
                       Expanded(
                         child: Text(
                           l10n.temperature(
-                              unitType, data.current.getTemperature),
+                            unitType,
+                            data.current.getTemperature,
+                          ),
                           style: GoogleFonts.jetBrainsMono(
                             color: foregroundColor,
                             fontSize: 64,
@@ -290,7 +316,7 @@ class CurrentWeatherSection extends ConsumerWidget {
                           ),
                           Text(
                             data.current.condition.text,
-                            style: theme.textTheme.titleLarge!.copyWith(
+                            style: textTheme.titleLarge!.copyWith(
                               color: foregroundColor,
                             ),
                           ),
@@ -299,14 +325,27 @@ class CurrentWeatherSection extends ConsumerWidget {
                     ],
                   ),
                 ),
-                Row(
+                RowPadded(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      "${data.location.localtime.format()} ${data.location.localtime.formatDOW()}",
-                      style: theme.textTheme.titleSmall!.copyWith(
-                        color: foregroundColor,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        data.location.localTimeFormatted,
+                        style: mediumTextStyle,
                       ),
+                    ),
+                    ColumnPadded(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "${l10n.max} ${l10n.temperature(unitType, day.maxTemperature)}",
+                          style: mediumTextStyle,
+                        ),
+                        Text(
+                          "${l10n.min} ${l10n.temperature(unitType, day.minTemperature)}",
+                          style: mediumTextStyle,
+                        ),
+                      ],
                     ),
                   ],
                 ),

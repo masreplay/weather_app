@@ -10,6 +10,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsHourGen {
   const $AssetsHourGen();
 
+  /// File path: assets/hour/day.jpg
+  AssetGenImage get day => const AssetGenImage('assets/hour/day.jpg');
+
   /// File path: assets/hour/night.png
   AssetGenImage get night => const AssetGenImage('assets/hour/night.png');
 }

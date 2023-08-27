@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weather_app/data/service/models/temperature_unit.dart';
+import 'package:weather_app/date_time.dart';
 
 part 'forecast.freezed.dart';
 part 'forecast.g.dart';
@@ -36,6 +37,9 @@ class Location with _$Location {
     required int localtimeEpoch,
     required DateTime localtime,
   }) = _Location;
+
+  String get localTimeFormatted =>
+      "${localtime.format()} ${localtime.formatDOW()}";
 
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
@@ -168,13 +172,13 @@ class Day with _$Day {
     required num uv,
   }) = _Day;
 
-  num maxTempreture(UnitType unit) =>
+  num maxTemperature(UnitType unit) =>
       unit == UnitType.metric ? maxtempC : maxtempF;
 
-  num minTempreture(UnitType unit) =>
+  num minTemperature(UnitType unit) =>
       unit == UnitType.metric ? mintempC : mintempF;
 
-  num avgTempreture(UnitType unit) =>
+  num avgTemperature(UnitType unit) =>
       unit == UnitType.metric ? avgtempC : avgtempF;
 
   num maxWind(UnitType unit) =>

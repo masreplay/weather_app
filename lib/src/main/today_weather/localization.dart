@@ -8,8 +8,8 @@ extension AppLocalizationsX on AppLocalizations {
   // ignore: unused_element
   String pressure(UnitType unitType, double Function(UnitType unit) callback) =>
       pressureUnit(callback(unitType), unitType.name);
-  
+
   // ignore: unused_element
-  String temperature(UnitType unitType, double Function(UnitType unit) callback) =>
-      temperatureUnit(callback(unitType), unitType.name);
+  String temperature(UnitType unitType, num Function(UnitType unit) callback) =>
+      temperatureUnit(callback(unitType).toDouble(), unitType.name);
 }

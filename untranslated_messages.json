@@ -12,6 +12,8 @@
     "metric",
     "imperial",
     "rainChance",
+    "max",
+    "min",
     "percent",
     "uvIndex",
     "pressure",

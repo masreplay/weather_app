@@ -12,6 +12,8 @@
     "metric": "Metric",
     "imperial": "Imperial",
     "rainChance": "Rain Chance",
+    "max": "Max",
+    "min": "Min",
     "percent": "{value}%",
     "@percent": {
         "placeholders": {
