@@ -3,6 +3,7 @@ import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/data/repositories/search_repository.dart';
 import 'package:weather_app/data/service/service.dart';
 import 'package:weather_app/src/main/search/saved_place_provider.dart';
+import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
 import 'package:weather_app/src/settings/settings_provider.dart';
 
 part 'search_page.g.dart';
@@ -28,7 +29,9 @@ class SearchAppBar extends ConsumerWidget {
 
     return SearchAnchor(
       builder: (context, controller) {
-        if (controller.text.isEmpty) controller.text = savedPlace?.name ?? '';
+        if (controller.text.isEmpty) {
+          controller.text = savedPlace?.name ?? defaultPlace;
+        }
 
         return TextField(
           controller: controller,

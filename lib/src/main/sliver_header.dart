@@ -77,15 +77,12 @@ class SliverHeader extends HookConsumerWidget {
           icon: const Icon(Icons.settings),
         )
       ],
-      title: SearchAppBar(
-        foregroundColor: textColor,
-      ),
+      title: SearchAppBar(foregroundColor: textColor),
       collapsedHeight: collapsedHeight,
       expandedHeight: expandedHeight,
       flexibleSpace: ClipRRect(
         borderRadius: _expandedBorderRadius,
         child: FlexibleSpaceBar(
-          collapseMode: CollapseMode.parallax,
           background: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
