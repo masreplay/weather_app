@@ -3,6 +3,8 @@
     "tomorrow": "Tomorrow",
     "forecast": "Forecast",
     "snow": "Snow",
+    "unitSystem": "Unit System",
+    "systemLanguage": "System Language",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
     "settings": "Settings",

@@ -20,7 +20,7 @@ AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AppSettings {
-  UnitType get unitType => throw _privateConstructorUsedError;
+  UnitSystem get unitSystem => throw _privateConstructorUsedError;
   @LocaleJsonConverter()
   Locale? get locale => throw _privateConstructorUsedError;
   @ThemeModeJsonConvertor()
@@ -39,7 +39,7 @@ abstract class $AppSettingsCopyWith<$Res> {
       _$AppSettingsCopyWithImpl<$Res, AppSettings>;
   @useResult
   $Res call(
-      {UnitType unitType,
+      {UnitSystem unitSystem,
       @LocaleJsonConverter() Locale? locale,
       @ThemeModeJsonConvertor() ThemeMode themeMode});
 }
@@ -57,15 +57,15 @@ class _$AppSettingsCopyWithImpl<$Res, $Val extends AppSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? unitType = null,
+    Object? unitSystem = null,
     Object? locale = freezed,
     Object? themeMode = null,
   }) {
     return _then(_value.copyWith(
-      unitType: null == unitType
-          ? _value.unitType
-          : unitType // ignore: cast_nullable_to_non_nullable
-              as UnitType,
+      unitSystem: null == unitSystem
+          ? _value.unitSystem
+          : unitSystem // ignore: cast_nullable_to_non_nullable
+              as UnitSystem,
       locale: freezed == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$_AppSettingsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {UnitType unitType,
+      {UnitSystem unitSystem,
       @LocaleJsonConverter() Locale? locale,
       @ThemeModeJsonConvertor() ThemeMode themeMode});
 }
@@ -103,15 +103,15 @@ class __$$_AppSettingsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? unitType = null,
+    Object? unitSystem = null,
     Object? locale = freezed,
     Object? themeMode = null,
   }) {
     return _then(_$_AppSettings(
-      unitType: null == unitType
-          ? _value.unitType
-          : unitType // ignore: cast_nullable_to_non_nullable
-              as UnitType,
+      unitSystem: null == unitSystem
+          ? _value.unitSystem
+          : unitSystem // ignore: cast_nullable_to_non_nullable
+              as UnitSystem,
       locale: freezed == locale
           ? _value.locale
           : locale // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ class __$$_AppSettingsCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_AppSettings extends _AppSettings {
   _$_AppSettings(
-      {this.unitType = UnitType.metric,
+      {this.unitSystem = UnitSystem.metric,
       @LocaleJsonConverter() this.locale,
       @ThemeModeJsonConvertor() this.themeMode = ThemeMode.system})
       : super._();
@@ -139,7 +139,7 @@ class _$_AppSettings extends _AppSettings {
 
   @override
   @JsonKey()
-  final UnitType unitType;
+  final UnitSystem unitSystem;
   @override
   @LocaleJsonConverter()
   final Locale? locale;
@@ -150,7 +150,7 @@ class _$_AppSettings extends _AppSettings {
 
   @override
   String toString() {
-    return 'AppSettings(unitType: $unitType, locale: $locale, themeMode: $themeMode)';
+    return 'AppSettings(unitSystem: $unitSystem, locale: $locale, themeMode: $themeMode)';
   }
 
   @override
@@ -158,8 +158,8 @@ class _$_AppSettings extends _AppSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppSettings &&
-            (identical(other.unitType, unitType) ||
-                other.unitType == unitType) &&
+            (identical(other.unitSystem, unitSystem) ||
+                other.unitSystem == unitSystem) &&
             (identical(other.locale, locale) || other.locale == locale) &&
             (identical(other.themeMode, themeMode) ||
                 other.themeMode == themeMode));
@@ -167,7 +167,7 @@ class _$_AppSettings extends _AppSettings {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, unitType, locale, themeMode);
+  int get hashCode => Object.hash(runtimeType, unitSystem, locale, themeMode);
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +185,7 @@ class _$_AppSettings extends _AppSettings {
 
 abstract class _AppSettings extends AppSettings {
   factory _AppSettings(
-      {final UnitType unitType,
+      {final UnitSystem unitSystem,
       @LocaleJsonConverter() final Locale? locale,
       @ThemeModeJsonConvertor() final ThemeMode themeMode}) = _$_AppSettings;
   _AppSettings._() : super._();
@@ -194,7 +194,7 @@ abstract class _AppSettings extends AppSettings {
       _$_AppSettings.fromJson;
 
   @override
-  UnitType get unitType;
+  UnitSystem get unitSystem;
   @override
   @LocaleJsonConverter()
   Locale? get locale;

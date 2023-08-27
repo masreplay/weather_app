@@ -8,9 +8,9 @@ part of 'settings_provider.dart';
 
 _$_AppSettings _$$_AppSettingsFromJson(Map<String, dynamic> json) =>
     _$_AppSettings(
-      unitType: json['unitType'] == null
-          ? UnitType.metric
-          : UnitType.fromJson(json['unitType'] as String),
+      unitSystem: json['unitSystem'] == null
+          ? UnitSystem.metric
+          : UnitSystem.fromJson(json['unitSystem'] as String),
       locale: _$JsonConverterFromJson<String, Locale>(
           json['locale'], const LocaleJsonConverter().fromJson),
       themeMode: json['themeMode'] == null
@@ -21,7 +21,7 @@ _$_AppSettings _$$_AppSettingsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_AppSettingsToJson(_$_AppSettings instance) =>
     <String, dynamic>{
-      'unitType': instance.unitType.toJson(),
+      'unitSystem': instance.unitSystem.toJson(),
       'locale': _$JsonConverterToJson<String, Locale>(
           instance.locale, const LocaleJsonConverter().toJson),
       'themeMode': const ThemeModeJsonConvertor().toJson(instance.themeMode),

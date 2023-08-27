@@ -49,7 +49,7 @@ class ForecastWeatherPage extends HookConsumerWidget {
                   ),
                   Text(
                     l10n.temperature(
-                      settings.unitType,
+                      settings.unitSystem,
                       forecast.day.avgTemperature,
                     ),
                     style: theme.textTheme.titleLarge,

@@ -50,7 +50,7 @@ class ForecastBody extends HookConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
 
     final settings = ref.watch(settingsPreferenceProvider);
-    final unitType = settings.unitType;
+    final unitSystem = settings.unitSystem;
 
     const gutter = Insets.medium;
 
@@ -78,7 +78,7 @@ class ForecastBody extends HookConsumerWidget {
               title: Text(l10n.windSpeed),
               icon: Icons.air_outlined,
               subtitle: Text(
-                l10n.speed(unitType, forecast.day.maxWind),
+                l10n.speed(unitSystem, forecast.day.maxWind),
               ),
             ),
             ItemListTile(
@@ -90,14 +90,14 @@ class ForecastBody extends HookConsumerWidget {
               title: Text(l10n.snow),
               icon: Icons.wind_power_outlined,
               subtitle: Text(
-                l10n.speed(unitType, forecast.day.totalSnow),
+                l10n.speed(unitSystem, forecast.day.totalSnow),
               ),
             ),
             ItemListTile(
               title: Text(l10n.visibility),
               icon: Icons.visibility_outlined,
               subtitle: Text(
-                l10n.speed(unitType, forecast.day.avgVisibility),
+                l10n.speed(unitSystem, forecast.day.avgVisibility),
               ),
             ),
           ],
@@ -105,7 +105,7 @@ class ForecastBody extends HookConsumerWidget {
         const Gap(16),
         HourlyForecastListTile(
           hours: forecast.hour,
-          unitType: unitType,
+          unitSystem: unitSystem,
         ),
         const Gap(16),
         GridView(
@@ -139,11 +139,11 @@ class HourlyForecastListTile extends StatelessWidget {
   const HourlyForecastListTile({
     super.key,
     required this.hours,
-    required this.unitType,
+    required this.unitSystem,
   });
 
   final List<Hour> hours;
-  final UnitType unitType;
+  final UnitSystem unitSystem;
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +174,7 @@ class HourlyForecastListTile extends StatelessWidget {
                 ),
                 Text(
                   l10n.temperature(
-                    unitType,
+                    unitSystem,
                     item.getTemperature,
                   ),
                   style: theme.textTheme.bodyLarge?.copyWith(

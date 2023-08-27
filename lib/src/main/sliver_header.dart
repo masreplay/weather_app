@@ -70,11 +70,11 @@ class SliverHeader extends HookConsumerWidget {
         background: Stack(
           children: [
             CurrentDaySection(
-              unitType: settings.unitType,
+              unitSystem: settings.unitSystem,
               foregroundColor: textColor,
             ),
             CurrentWeatherSection(
-              unitType: settings.unitType,
+              unitSystem: settings.unitSystem,
               foregroundColor: textColor,
             ),
           ],
@@ -87,11 +87,11 @@ class SliverHeader extends HookConsumerWidget {
 class CurrentDaySection extends ConsumerWidget {
   const CurrentDaySection({
     super.key,
-    required this.unitType,
+    required this.unitSystem,
     required this.foregroundColor,
   });
 
-  final UnitType unitType;
+  final UnitSystem unitSystem;
   final Color foregroundColor;
 
   @override
@@ -179,11 +179,11 @@ class TabButton extends StatelessWidget {
 class CurrentWeatherSection extends ConsumerWidget {
   const CurrentWeatherSection({
     super.key,
-    required this.unitType,
+    required this.unitSystem,
     required this.foregroundColor,
   });
 
-  final UnitType unitType;
+  final UnitSystem unitSystem;
   final Color foregroundColor;
 
   @override
@@ -219,7 +219,7 @@ class CurrentWeatherSection extends ConsumerWidget {
                       Expanded(
                         child: Text(
                           l10n.temperature(
-                            unitType,
+                            unitSystem,
                             data.current.getTemperature,
                           ),
                           style: GoogleFonts.jetBrainsMono(
@@ -267,11 +267,11 @@ class CurrentWeatherSection extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          "${l10n.max} ${l10n.temperature(unitType, day.maxTemperature)}",
+                          "${l10n.max} ${l10n.temperature(unitSystem, day.maxTemperature)}",
                           style: mediumTextStyle,
                         ),
                         Text(
-                          "${l10n.min} ${l10n.temperature(unitType, day.minTemperature)}",
+                          "${l10n.min} ${l10n.temperature(unitSystem, day.minTemperature)}",
                           style: mediumTextStyle,
                         ),
                       ],

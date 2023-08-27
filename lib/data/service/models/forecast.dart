@@ -82,25 +82,26 @@ class Current with _$Current {
     required double gustKph,
   }) = _Current;
 
-  double getWindSpeed(UnitType unit) =>
-      unit == UnitType.metric ? windKph : windMph;
+  double getWindSpeed(UnitSystem unit) =>
+      unit == UnitSystem.metric ? windKph : windMph;
 
-  double getTemperature(UnitType unit) =>
-      unit == UnitType.metric ? tempC : tempF;
+  double getTemperature(UnitSystem unit) =>
+      unit == UnitSystem.metric ? tempC : tempF;
 
-  double getFeelsLike(UnitType unit) =>
-      unit == UnitType.metric ? feelslikeC : feelslikeF;
+  double getFeelsLike(UnitSystem unit) =>
+      unit == UnitSystem.metric ? feelslikeC : feelslikeF;
 
-  double getPressure(UnitType unit) =>
-      unit == UnitType.metric ? pressureMb : pressureIn;
+  double getPressure(UnitSystem unit) =>
+      unit == UnitSystem.metric ? pressureMb : pressureIn;
 
-  double getPrecipitation(UnitType unit) =>
-      unit == UnitType.metric ? precipMm : precipIn;
+  double getPrecipitation(UnitSystem unit) =>
+      unit == UnitSystem.metric ? precipMm : precipIn;
 
-  double getVisibility(UnitType unit) =>
-      unit == UnitType.metric ? visKm : visMiles;
+  double getVisibility(UnitSystem unit) =>
+      unit == UnitSystem.metric ? visKm : visMiles;
 
-  double getGust(UnitType unit) => unit == UnitType.metric ? gustKph : gustMph;
+  double getGust(UnitSystem unit) =>
+      unit == UnitSystem.metric ? gustKph : gustMph;
 
   factory Current.fromJson(Map<String, dynamic> json) =>
       _$CurrentFromJson(json);
@@ -178,26 +179,26 @@ class Day with _$Day {
     required num uv,
   }) = _Day;
 
-  num maxTemperature(UnitType unit) =>
-      unit == UnitType.metric ? maxtempC : maxtempF;
+  num maxTemperature(UnitSystem unit) =>
+      unit == UnitSystem.metric ? maxtempC : maxtempF;
 
-  num minTemperature(UnitType unit) =>
-      unit == UnitType.metric ? mintempC : mintempF;
+  num minTemperature(UnitSystem unit) =>
+      unit == UnitSystem.metric ? mintempC : mintempF;
 
-  num avgTemperature(UnitType unit) =>
-      unit == UnitType.metric ? avgtempC : avgtempF;
+  num avgTemperature(UnitSystem unit) =>
+      unit == UnitSystem.metric ? avgtempC : avgtempF;
 
-  num maxWind(UnitType unit) =>
-      unit == UnitType.metric ? maxwindKph : maxwindMph;
+  num maxWind(UnitSystem unit) =>
+      unit == UnitSystem.metric ? maxwindKph : maxwindMph;
 
-  num totalPrecipitation(UnitType unit) =>
-      unit == UnitType.metric ? totalprecipMm : totalprecipIn;
+  num totalPrecipitation(UnitSystem unit) =>
+      unit == UnitSystem.metric ? totalprecipMm : totalprecipIn;
 
-  num totalSnow(UnitType unit) =>
-      unit == UnitType.metric ? totalsnowCm : totalsnowCm;
+  num totalSnow(UnitSystem unit) =>
+      unit == UnitSystem.metric ? totalsnowCm : totalsnowCm;
 
-  num avgVisibility(UnitType unit) =>
-      unit == UnitType.metric ? avgvisKm : avgvisMiles;
+  num avgVisibility(UnitSystem unit) =>
+      unit == UnitSystem.metric ? avgvisKm : avgvisMiles;
 
   factory Day.fromJson(Map<String, dynamic> json) => _$DayFromJson(json);
 }
@@ -263,34 +264,35 @@ class Hour with _$Hour {
     required double uv,
   }) = _Hour;
 
-  double getTemperature(UnitType unit) =>
-      unit == UnitType.metric ? tempC : tempF;
+  double getTemperature(UnitSystem unit) =>
+      unit == UnitSystem.metric ? tempC : tempF;
 
-  double getFeelsLike(UnitType unit) =>
-      unit == UnitType.metric ? feelslikeC : feelslikeF;
+  double getFeelsLike(UnitSystem unit) =>
+      unit == UnitSystem.metric ? feelslikeC : feelslikeF;
 
-  double getWindSpeed(UnitType unit) =>
-      unit == UnitType.metric ? windKph : windMph;
+  double getWindSpeed(UnitSystem unit) =>
+      unit == UnitSystem.metric ? windKph : windMph;
 
-  double getWindChill(UnitType unit) =>
-      unit == UnitType.metric ? windchillC : windchillF;
+  double getWindChill(UnitSystem unit) =>
+      unit == UnitSystem.metric ? windchillC : windchillF;
 
-  double getHeatIndex(UnitType unit) =>
-      unit == UnitType.metric ? heatindexC : heatindexF;
+  double getHeatIndex(UnitSystem unit) =>
+      unit == UnitSystem.metric ? heatindexC : heatindexF;
 
-  double getDewPoint(UnitType unit) =>
-      unit == UnitType.metric ? dewpointC : dewpointF;
+  double getDewPoint(UnitSystem unit) =>
+      unit == UnitSystem.metric ? dewpointC : dewpointF;
 
-  double getVisibility(UnitType unit) =>
-      unit == UnitType.metric ? visKm : visMiles;
+  double getVisibility(UnitSystem unit) =>
+      unit == UnitSystem.metric ? visKm : visMiles;
 
-  double getGust(UnitType unit) => unit == UnitType.metric ? gustKph : gustMph;
+  double getGust(UnitSystem unit) =>
+      unit == UnitSystem.metric ? gustKph : gustMph;
 
-  double getPressure(UnitType unit) =>
-      unit == UnitType.metric ? pressureMb : pressureIn;
+  double getPressure(UnitSystem unit) =>
+      unit == UnitSystem.metric ? pressureMb : pressureIn;
 
-  double getPrecipitation(UnitType unit) =>
-      unit == UnitType.metric ? precipMm : precipIn;
+  double getPrecipitation(UnitSystem unit) =>
+      unit == UnitSystem.metric ? precipMm : precipIn;
 
   factory Hour.fromJson(Map<String, dynamic> json) => _$HourFromJson(json);
 }

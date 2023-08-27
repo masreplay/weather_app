@@ -15,7 +15,7 @@ class AppSettings with _$AppSettings {
 
   @JsonSerializable(explicitToJson: true)
   factory AppSettings({
-    @Default(UnitType.metric) UnitType unitType,
+    @Default(UnitSystem.metric) UnitSystem unitSystem,
     @LocaleJsonConverter() Locale? locale,
     @ThemeModeJsonConvertor() @Default(ThemeMode.system) ThemeMode themeMode,
   }) = _AppSettings;

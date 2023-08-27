@@ -4,19 +4,19 @@ import 'package:weather_app/common_lib.dart';
 part 'temperature_unit.g.dart';
 
 @JsonEnum(alwaysCreate: true)
-enum UnitType {
+enum UnitSystem {
   metric,
   imperial;
 
   String localize(AppLocalizations l10n) => switch (this) {
-        UnitType.metric => l10n.metric,
-        UnitType.imperial => l10n.imperial,
+        UnitSystem.metric => l10n.metric,
+        UnitSystem.imperial => l10n.imperial,
       };
 
-  factory UnitType.fromJson(String json) => values.firstWhere(
+  factory UnitSystem.fromJson(String json) => values.firstWhere(
         (element) => element.toJson() == json,
-        orElse: () => UnitType.metric,
+        orElse: () => UnitSystem.metric,
       );
 
-  String toJson() => _$UnitTypeEnumMap[this]!;
+  String toJson() => _$UnitSystemEnumMap[this]!;
 }
