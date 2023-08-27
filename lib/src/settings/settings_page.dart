@@ -87,8 +87,44 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     .updateValue(settings.copyWith(locale: value));
               },
             ),
+          Text(
+            l10n.theme,
+            style: theme.textTheme.titleLarge,
+          ),
+          for (final themeMode in ThemeMode.values)
+            RadioListTile<ThemeMode>(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(themeMode.localize(l10n)),
+                  Icon(themeMode.getIcon()),
+                ],
+              ),
+              value: themeMode,
+              groupValue: settings.themeMode,
+              onChanged: (value) {
+                ref
+                    .read(settingsPreferenceProvider.notifier)
+                    .updateValue(settings.copyWith(themeMode: value!));
+              },
+            ),
         ],
       ),
     );
   }
+}
+
+/// extends theme [ThemeMode] to localize it, and add icon
+extension on ThemeMode {
+  String localize(AppLocalizations l10n) => switch (this) {
+        ThemeMode.system => l10n.systemTheme,
+        ThemeMode.light => l10n.lightTheme,
+        ThemeMode.dark => l10n.darkTheme,
+      };
+
+  IconData getIcon() => switch (this) {
+        ThemeMode.system => Icons.brightness_auto_outlined,
+        ThemeMode.light => Icons.brightness_high_outlined,
+        ThemeMode.dark => Icons.brightness_3_outlined,
+      };
 }

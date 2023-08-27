@@ -19,7 +19,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
-      textTheme: _buildTextTheme(),
+      textTheme: _buildTextTheme(brightness),
       colorScheme: _buildColorScheme(brightness),
     );
   }
@@ -39,7 +39,27 @@ class AppTheme {
     );
   }
 
-  TextTheme _buildTextTheme() {
-    return GoogleFonts.ibmPlexSansArabicTextTheme();
+  TextTheme _buildTextTheme(Brightness brightness) {
+    final colorScheme = _buildColorScheme(brightness);
+
+    final textStyle = TextStyle(height: 1.5, color: colorScheme.onBackground);
+    final textTheme = TextTheme(
+      displayLarge: textStyle,
+      displayMedium: textStyle,
+      displaySmall: textStyle,
+      headlineLarge: textStyle,
+      headlineMedium: textStyle,
+      headlineSmall: textStyle,
+      titleLarge: textStyle,
+      titleMedium: textStyle,
+      titleSmall: textStyle,
+      bodyLarge: textStyle,
+      bodyMedium: textStyle,
+      bodySmall: textStyle,
+      labelLarge: textStyle,
+      labelMedium: textStyle,
+      labelSmall: textStyle,
+    );
+    return GoogleFonts.ibmPlexSansArabicTextTheme(textTheme);
   }
 }

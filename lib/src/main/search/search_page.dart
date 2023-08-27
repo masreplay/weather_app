@@ -91,7 +91,7 @@ class ThemeIconButton extends ConsumerWidget {
 
     return IconButton(
       isSelected: isLightTheme,
-      tooltip: isLightTheme ? l10n.lightMode : l10n.darkMode,
+      tooltip: isLightTheme ? l10n.lightTheme : l10n.darkTheme,
       icon: const Icon(Icons.wb_sunny_outlined),
       selectedIcon: const Icon(Icons.brightness_2_outlined),
       onPressed: () {
