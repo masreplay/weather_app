@@ -1,5 +1,7 @@
 {
     "today": "Today",
+    "tomorrow": "Tomorrow",
+    "forecast": "Forecast",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
     "settings": "Settings",

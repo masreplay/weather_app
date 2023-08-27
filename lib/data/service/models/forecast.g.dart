@@ -27,7 +27,8 @@ _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
       lon: (json['lon'] as num).toDouble(),
       tzId: json['tz_id'] as String,
       localtimeEpoch: json['localtime_epoch'] as int,
-      localtime: DateTime.parse(json['localtime'] as String),
+      localtime:
+          const DateTimeJsonConverter().fromJson(json['localtime'] as String),
     );
 
 Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
@@ -39,12 +40,13 @@ Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
       'lon': instance.lon,
       'tz_id': instance.tzId,
       'localtime_epoch': instance.localtimeEpoch,
-      'localtime': instance.localtime.toIso8601String(),
+      'localtime': const DateTimeJsonConverter().toJson(instance.localtime),
     };
 
 _$_Current _$$_CurrentFromJson(Map<String, dynamic> json) => _$_Current(
       lastUpdatedEpoch: json['last_updated_epoch'] as int,
-      lastUpdated: DateTime.parse(json['last_updated'] as String),
+      lastUpdated: const DateTimeJsonConverter()
+          .fromJson(json['last_updated'] as String),
       tempC: (json['temp_c'] as num).toDouble(),
       tempF: (json['temp_f'] as num).toDouble(),
       isDay: json['is_day'] as int,
@@ -71,7 +73,8 @@ _$_Current _$$_CurrentFromJson(Map<String, dynamic> json) => _$_Current(
 Map<String, dynamic> _$$_CurrentToJson(_$_Current instance) =>
     <String, dynamic>{
       'last_updated_epoch': instance.lastUpdatedEpoch,
-      'last_updated': instance.lastUpdated.toIso8601String(),
+      'last_updated':
+          const DateTimeJsonConverter().toJson(instance.lastUpdated),
       'temp_c': instance.tempC,
       'temp_f': instance.tempF,
       'is_day': instance.isDay,
@@ -213,7 +216,7 @@ Map<String, dynamic> _$$_AstroToJson(_$_Astro instance) => <String, dynamic>{
 
 _$_Hour _$$_HourFromJson(Map<String, dynamic> json) => _$_Hour(
       timeEpoch: json['time_epoch'] as int,
-      time: DateTime.parse(json['time'] as String),
+      time: const DateTimeJsonConverter().fromJson(json['time'] as String),
       tempC: (json['temp_c'] as num).toDouble(),
       tempF: (json['temp_f'] as num).toDouble(),
       isDay: json['is_day'] as int,
@@ -249,7 +252,7 @@ _$_Hour _$$_HourFromJson(Map<String, dynamic> json) => _$_Hour(
 
 Map<String, dynamic> _$$_HourToJson(_$_Hour instance) => <String, dynamic>{
       'time_epoch': instance.timeEpoch,
-      'time': instance.time.toIso8601String(),
+      'time': const DateTimeJsonConverter().toJson(instance.time),
       'temp_c': instance.tempC,
       'temp_f': instance.tempF,
       'is_day': instance.isDay,

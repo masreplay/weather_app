@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weather_app/common_lib.dart';
+import 'package:weather_app/data/service/json_converters/date_time_json_converter.dart';
 import 'package:weather_app/data/service/json_converters/time_of_day_json_converter.dart';
 import 'package:weather_app/data/service/models/temperature_unit.dart';
 import 'package:weather_app/date_time.dart';
@@ -9,6 +10,9 @@ part 'forecast.g.dart';
 
 const jsonSerializable = JsonSerializable(
   fieldRename: FieldRename.snake,
+  converters: [
+    DateTimeJsonConverter(),
+  ],
 );
 
 @freezed
@@ -202,10 +206,9 @@ class Day with _$Day {
 class Astro with _$Astro {
   const Astro._();
   @JsonSerializable(
-    fieldRename: FieldRename.snake,
-    explicitToJson: true,
-    converters: [TimeOfDayJsonConverter()]
-  )
+      fieldRename: FieldRename.snake,
+      explicitToJson: true,
+      converters: [TimeOfDayJsonConverter()])
   factory Astro({
     required TimeOfDay sunrise,
     required TimeOfDay sunset,
@@ -291,4 +294,3 @@ class Hour with _$Hour {
 
   factory Hour.fromJson(Map<String, dynamic> json) => _$HourFromJson(json);
 }
-
