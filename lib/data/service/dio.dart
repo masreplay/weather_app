@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:dio/dio.dart';
 import 'package:weather_app/data/service/interceptors/authenticator.dart';
+import 'package:weather_app/data/service/interceptors/language_interceptor.dart';
 
 part 'dio.g.dart';
 
@@ -10,6 +11,7 @@ Dio dio(DioRef ref) {
 
   dio.interceptors.addAll([
     Authenticator(),
+    LanguageInterceptor(ref),
     LogInterceptor(responseBody: true),
   ]);
 

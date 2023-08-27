@@ -1,9 +1,18 @@
+import 'dart:ui';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/common_lib.dart';
+import 'package:weather_app/data/service/models/temperature_unit.dart';
+import 'package:weather_app/date_time.dart';
 import 'package:weather_app/gen/assets.gen.dart';
 import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/src/main/flex_padded.dart';
 import 'package:weather_app/src/main/search/search_page.dart';
+import 'package:weather_app/src/main/today_weather/localization.dart';
+import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
+import 'package:weather_app/src/settings/settings_provider.dart';
+import 'package:weather_app/theme.dart';
 
 @RoutePage()
 class MainPage extends StatelessWidget {
@@ -51,6 +60,7 @@ class MainPage extends StatelessWidget {
         return HookConsumer(
           builder: (context, ref, _) {
             final scrolledTo = useState(false);
+            final settings = ref.watch(settingsPreferenceProvider);
             final collapsedHeight = MediaQuery.sizeOf(context).height / 4;
             final expandedHeight = MediaQuery.sizeOf(context).height / 2;
 
@@ -75,50 +85,83 @@ class MainPage extends StatelessWidget {
 
                   return true;
                 },
-                child: CustomScrollView(
-                  slivers: [
-                    SliverAppBar(
-                      foregroundColor: textColor,
-                      pinned: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: borderRadius,
-                      ),
-                      title: SearchAppBar(
+                child: RefreshIndicator(
+                  onRefresh: () => ref.refresh(getTodayForecastProvider.future),
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverAppBar(
                         foregroundColor: textColor,
-                      ),
-                      collapsedHeight: collapsedHeight,
-                      expandedHeight: expandedHeight,
-                      flexibleSpace: ClipRRect(
-                        borderRadius: borderRadius,
-                        child: FlexibleSpaceBar(
-                          collapseMode: CollapseMode.parallax,
-                          background: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: ClipRRect(
-                                  borderRadius: borderRadius,
-                                  child: Assets.hour.night.image(
-                                    fit: BoxFit.cover,
+                        pinned: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: borderRadius,
+                        ),
+                        title: SearchAppBar(
+                          foregroundColor: textColor,
+                        ),
+                        collapsedHeight: collapsedHeight,
+                        expandedHeight: expandedHeight,
+                        flexibleSpace: ClipRRect(
+                          borderRadius: borderRadius,
+                          child: FlexibleSpaceBar(
+                            collapseMode: CollapseMode.parallax,
+                            background: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Stack(
+                                    children: [
+                                      Positioned.fill(
+                                        child: ClipRRect(
+                                          borderRadius: borderRadius,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: ExactAssetImage(
+                                                    Assets.hour.night.path),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            child: BackdropFilter(
+                                              filter: ImageFilter.blur(
+                                                  sigmaX: 10.0, sigmaY: 10.0),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: theme
+                                                      .colorScheme.background
+                                                      .withOpacity(0.0),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      CurrentWeatherSection(
+                                        unitType: settings.unitType,
+                                        foregroundColor: textColor,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                child: RowPadded(children: tabs),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: Insets.medium,
+                                    vertical: Insets.small,
+                                  ),
+                                  child: RowPadded(
+                                    gap: Insets.medium,
+                                    children: tabs,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SliverFillRemaining(
-                      child: child,
-                    )
-                  ],
+                      SliverFillRemaining(
+                        child: child,
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
@@ -160,23 +203,117 @@ class TabButton extends StatelessWidget {
       style: theme.textTheme.titleMedium!.copyWith(
         fontWeight: FontWeight.bold,
         color: selected
-            ? theme.colorScheme.onSecondaryContainer
-            : theme.colorScheme.onSurface,
+            ? theme.colorScheme.onPrimary
+            : theme.colorScheme.onSurfaceVariant,
       ),
       child: InkWell(
         borderRadius: borderRadius,
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+          padding: const EdgeInsets.symmetric(
+            horizontal: Insets.medium,
+            vertical: Insets.medium,
+          ),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: selected
-                ? theme.colorScheme.secondaryContainer
-                : theme.colorScheme.surface,
+                ? theme.colorScheme.primary
+                : theme.colorScheme.surfaceVariant,
             borderRadius: borderRadius,
           ),
           child: text,
+        ),
+      ),
+    );
+  }
+}
+
+class CurrentWeatherSection extends ConsumerWidget {
+  const CurrentWeatherSection({
+    super.key,
+    required this.unitType,
+    required this.foregroundColor,
+  });
+
+  final UnitType unitType;
+  final Color foregroundColor;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = getTodayForecastProvider;
+    final state = ref.watch(provider);
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Insets.medium,
+          vertical: Insets.large,
+        ).add(const EdgeInsets.only(top: kToolbarHeight)),
+        child: state.maybeWhen(
+          data: (data) {
+            if (data == null) return const SizedBox.shrink();
+
+            return Column(
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          l10n.temperature(
+                              unitType, data.current.getTemperature),
+                          style: GoogleFonts.jetBrainsMono(
+                            color: foregroundColor,
+                            fontSize: 64,
+                          ),
+                        ),
+                      ),
+                      ColumnPadded(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: foregroundColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.network(
+                              data.current.condition.image(),
+                              height: 72,
+                              width: 72,
+                            ),
+                          ),
+                          Text(
+                            data.current.condition.text,
+                            style: theme.textTheme.titleLarge!.copyWith(
+                              color: foregroundColor,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "${data.location.localtime.format()} ${data.location.localtime.formatDOW()}",
+                      style: theme.textTheme.titleSmall!.copyWith(
+                        color: foregroundColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+          orElse: SizedBox.shrink,
         ),
       ),
     );

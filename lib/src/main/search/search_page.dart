@@ -29,7 +29,7 @@ class SearchAppBar extends ConsumerWidget {
     return SearchAnchor(
       builder: (context, controller) {
         if (controller.text.isEmpty) controller.text = savedPlace?.name ?? '';
-        
+
         return TextField(
           controller: controller,
           enabled: false,

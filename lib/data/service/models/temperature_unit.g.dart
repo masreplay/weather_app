@@ -6,7 +6,7 @@ part of 'temperature_unit.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-const _$TemperatureUnitEnumMap = {
-  TemperatureUnit.celsius: 'celsius',
-  TemperatureUnit.fahrenheit: 'fahrenheit',
+const _$UnitTypeEnumMap = {
+  UnitType.metric: 'metric',
+  UnitType.imperial: 'imperial',
 };

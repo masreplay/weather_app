@@ -151,10 +151,11 @@ class __$$_ForecastCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_Forecast implements _Forecast {
+@jsonSerializable
+class _$_Forecast extends _Forecast {
   _$_Forecast(
-      {required this.location, required this.current, required this.forecast});
+      {required this.location, required this.current, required this.forecast})
+      : super._();
 
   factory _$_Forecast.fromJson(Map<String, dynamic> json) =>
       _$$_ForecastFromJson(json);
@@ -201,11 +202,12 @@ class _$_Forecast implements _Forecast {
   }
 }
 
-abstract class _Forecast implements Forecast {
+abstract class _Forecast extends Forecast {
   factory _Forecast(
       {required final Location location,
       required final Current current,
       required final ForecastData forecast}) = _$_Forecast;
+  _Forecast._() : super._();
 
   factory _Forecast.fromJson(Map<String, dynamic> json) = _$_Forecast.fromJson;
 
@@ -394,8 +396,8 @@ class __$$_LocationCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_Location implements _Location {
+@jsonSerializable
+class _$_Location extends _Location {
   _$_Location(
       {required this.name,
       required this.region,
@@ -404,7 +406,8 @@ class _$_Location implements _Location {
       required this.lon,
       required this.tzId,
       required this.localtimeEpoch,
-      required this.localtime});
+      required this.localtime})
+      : super._();
 
   factory _$_Location.fromJson(Map<String, dynamic> json) =>
       _$$_LocationFromJson(json);
@@ -467,7 +470,7 @@ class _$_Location implements _Location {
   }
 }
 
-abstract class _Location implements Location {
+abstract class _Location extends Location {
   factory _Location(
       {required final String name,
       required final String region,
@@ -477,6 +480,7 @@ abstract class _Location implements Location {
       required final String tzId,
       required final int localtimeEpoch,
       required final DateTime localtime}) = _$_Location;
+  _Location._() : super._();
 
   factory _Location.fromJson(Map<String, dynamic> json) = _$_Location.fromJson;
 
@@ -881,8 +885,8 @@ class __$$_CurrentCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_Current implements _Current {
+@jsonSerializable
+class _$_Current extends _Current {
   _$_Current(
       {required this.lastUpdatedEpoch,
       required this.lastUpdated,
@@ -906,7 +910,8 @@ class _$_Current implements _Current {
       required this.visMiles,
       required this.uv,
       required this.gustMph,
-      required this.gustKph});
+      required this.gustKph})
+      : super._();
 
   factory _$_Current.fromJson(Map<String, dynamic> json) =>
       _$$_CurrentFromJson(json);
@@ -1048,7 +1053,7 @@ class _$_Current implements _Current {
   }
 }
 
-abstract class _Current implements Current {
+abstract class _Current extends Current {
   factory _Current(
       {required final int lastUpdatedEpoch,
       required final DateTime lastUpdated,
@@ -1073,6 +1078,7 @@ abstract class _Current implements Current {
       required final double uv,
       required final double gustMph,
       required final double gustKph}) = _$_Current;
+  _Current._() : super._();
 
   factory _Current.fromJson(Map<String, dynamic> json) = _$_Current.fromJson;
 
@@ -1230,7 +1236,7 @@ class __$$_ConditionCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable()
+@jsonSerializable
 class _$_Condition extends _Condition {
   _$_Condition({required this.text, required this.icon, required this.code})
       : super._();
@@ -1382,10 +1388,11 @@ class __$$_ForecastDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_ForecastData implements _ForecastData {
+@jsonSerializable
+class _$_ForecastData extends _ForecastData {
   _$_ForecastData({required final List<ForecastDay> forecastday})
-      : _forecastday = forecastday;
+      : _forecastday = forecastday,
+        super._();
 
   factory _$_ForecastData.fromJson(Map<String, dynamic> json) =>
       _$$_ForecastDataFromJson(json);
@@ -1431,9 +1438,10 @@ class _$_ForecastData implements _ForecastData {
   }
 }
 
-abstract class _ForecastData implements ForecastData {
+abstract class _ForecastData extends ForecastData {
   factory _ForecastData({required final List<ForecastDay> forecastday}) =
       _$_ForecastData;
+  _ForecastData._() : super._();
 
   factory _ForecastData.fromJson(Map<String, dynamic> json) =
       _$_ForecastData.fromJson;
@@ -1598,15 +1606,16 @@ class __$$_ForecastDayCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_ForecastDay implements _ForecastDay {
+@jsonSerializable
+class _$_ForecastDay extends _ForecastDay {
   _$_ForecastDay(
       {required this.date,
       required this.dateEpoch,
       required this.day,
       required this.astro,
       required final List<Hour> hour})
-      : _hour = hour;
+      : _hour = hour,
+        super._();
 
   factory _$_ForecastDay.fromJson(Map<String, dynamic> json) =>
       _$$_ForecastDayFromJson(json);
@@ -1664,13 +1673,14 @@ class _$_ForecastDay implements _ForecastDay {
   }
 }
 
-abstract class _ForecastDay implements ForecastDay {
+abstract class _ForecastDay extends ForecastDay {
   factory _ForecastDay(
       {required final String date,
       required final int dateEpoch,
       required final Day day,
       required final Astro astro,
       required final List<Hour> hour}) = _$_ForecastDay;
+  _ForecastDay._() : super._();
 
   factory _ForecastDay.fromJson(Map<String, dynamic> json) =
       _$_ForecastDay.fromJson;
@@ -1697,26 +1707,26 @@ Day _$DayFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Day {
-  double get maxtempC => throw _privateConstructorUsedError;
-  double get maxtempF => throw _privateConstructorUsedError;
-  double get mintempC => throw _privateConstructorUsedError;
-  double get mintempF => throw _privateConstructorUsedError;
-  double get avgtempC => throw _privateConstructorUsedError;
-  double get avgtempF => throw _privateConstructorUsedError;
-  double get maxwindMph => throw _privateConstructorUsedError;
-  double get maxwindKph => throw _privateConstructorUsedError;
-  double get totalprecipMm => throw _privateConstructorUsedError;
-  double get totalprecipIn => throw _privateConstructorUsedError;
-  double get totalsnowCm => throw _privateConstructorUsedError;
-  double get avgvisKm => throw _privateConstructorUsedError;
-  double get avgvisMiles => throw _privateConstructorUsedError;
-  int get avghumidity => throw _privateConstructorUsedError;
-  int get dailyWillItRain => throw _privateConstructorUsedError;
-  int get dailyChanceOfRain => throw _privateConstructorUsedError;
-  int get dailyWillItSnow => throw _privateConstructorUsedError;
-  int get dailyChanceOfSnow => throw _privateConstructorUsedError;
+  num get maxtempC => throw _privateConstructorUsedError;
+  num get maxtempF => throw _privateConstructorUsedError;
+  num get mintempC => throw _privateConstructorUsedError;
+  num get mintempF => throw _privateConstructorUsedError;
+  num get avgtempC => throw _privateConstructorUsedError;
+  num get avgtempF => throw _privateConstructorUsedError;
+  num get maxwindMph => throw _privateConstructorUsedError;
+  num get maxwindKph => throw _privateConstructorUsedError;
+  num get totalprecipMm => throw _privateConstructorUsedError;
+  num get totalprecipIn => throw _privateConstructorUsedError;
+  num get totalsnowCm => throw _privateConstructorUsedError;
+  num get avgvisKm => throw _privateConstructorUsedError;
+  num get avgvisMiles => throw _privateConstructorUsedError;
+  num get avghumidity => throw _privateConstructorUsedError;
+  num get dailyWillItRain => throw _privateConstructorUsedError;
+  num get dailyChanceOfRain => throw _privateConstructorUsedError;
+  num get dailyWillItSnow => throw _privateConstructorUsedError;
+  num get dailyChanceOfSnow => throw _privateConstructorUsedError;
   Condition get condition => throw _privateConstructorUsedError;
-  double get uv => throw _privateConstructorUsedError;
+  num get uv => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1729,26 +1739,26 @@ abstract class $DayCopyWith<$Res> {
       _$DayCopyWithImpl<$Res, Day>;
   @useResult
   $Res call(
-      {double maxtempC,
-      double maxtempF,
-      double mintempC,
-      double mintempF,
-      double avgtempC,
-      double avgtempF,
-      double maxwindMph,
-      double maxwindKph,
-      double totalprecipMm,
-      double totalprecipIn,
-      double totalsnowCm,
-      double avgvisKm,
-      double avgvisMiles,
-      int avghumidity,
-      int dailyWillItRain,
-      int dailyChanceOfRain,
-      int dailyWillItSnow,
-      int dailyChanceOfSnow,
+      {num maxtempC,
+      num maxtempF,
+      num mintempC,
+      num mintempF,
+      num avgtempC,
+      num avgtempF,
+      num maxwindMph,
+      num maxwindKph,
+      num totalprecipMm,
+      num totalprecipIn,
+      num totalsnowCm,
+      num avgvisKm,
+      num avgvisMiles,
+      num avghumidity,
+      num dailyWillItRain,
+      num dailyChanceOfRain,
+      num dailyWillItSnow,
+      num dailyChanceOfSnow,
       Condition condition,
-      double uv});
+      num uv});
 
   $ConditionCopyWith<$Res> get condition;
 }
@@ -1790,75 +1800,75 @@ class _$DayCopyWithImpl<$Res, $Val extends Day> implements $DayCopyWith<$Res> {
       maxtempC: null == maxtempC
           ? _value.maxtempC
           : maxtempC // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       maxtempF: null == maxtempF
           ? _value.maxtempF
           : maxtempF // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       mintempC: null == mintempC
           ? _value.mintempC
           : mintempC // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       mintempF: null == mintempF
           ? _value.mintempF
           : mintempF // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgtempC: null == avgtempC
           ? _value.avgtempC
           : avgtempC // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgtempF: null == avgtempF
           ? _value.avgtempF
           : avgtempF // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       maxwindMph: null == maxwindMph
           ? _value.maxwindMph
           : maxwindMph // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       maxwindKph: null == maxwindKph
           ? _value.maxwindKph
           : maxwindKph // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       totalprecipMm: null == totalprecipMm
           ? _value.totalprecipMm
           : totalprecipMm // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       totalprecipIn: null == totalprecipIn
           ? _value.totalprecipIn
           : totalprecipIn // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       totalsnowCm: null == totalsnowCm
           ? _value.totalsnowCm
           : totalsnowCm // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgvisKm: null == avgvisKm
           ? _value.avgvisKm
           : avgvisKm // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgvisMiles: null == avgvisMiles
           ? _value.avgvisMiles
           : avgvisMiles // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avghumidity: null == avghumidity
           ? _value.avghumidity
           : avghumidity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyWillItRain: null == dailyWillItRain
           ? _value.dailyWillItRain
           : dailyWillItRain // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyChanceOfRain: null == dailyChanceOfRain
           ? _value.dailyChanceOfRain
           : dailyChanceOfRain // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyWillItSnow: null == dailyWillItSnow
           ? _value.dailyWillItSnow
           : dailyWillItSnow // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyChanceOfSnow: null == dailyChanceOfSnow
           ? _value.dailyChanceOfSnow
           : dailyChanceOfSnow // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
@@ -1866,7 +1876,7 @@ class _$DayCopyWithImpl<$Res, $Val extends Day> implements $DayCopyWith<$Res> {
       uv: null == uv
           ? _value.uv
           : uv // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
     ) as $Val);
   }
 
@@ -1886,26 +1896,26 @@ abstract class _$$_DayCopyWith<$Res> implements $DayCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {double maxtempC,
-      double maxtempF,
-      double mintempC,
-      double mintempF,
-      double avgtempC,
-      double avgtempF,
-      double maxwindMph,
-      double maxwindKph,
-      double totalprecipMm,
-      double totalprecipIn,
-      double totalsnowCm,
-      double avgvisKm,
-      double avgvisMiles,
-      int avghumidity,
-      int dailyWillItRain,
-      int dailyChanceOfRain,
-      int dailyWillItSnow,
-      int dailyChanceOfSnow,
+      {num maxtempC,
+      num maxtempF,
+      num mintempC,
+      num mintempF,
+      num avgtempC,
+      num avgtempF,
+      num maxwindMph,
+      num maxwindKph,
+      num totalprecipMm,
+      num totalprecipIn,
+      num totalsnowCm,
+      num avgvisKm,
+      num avgvisMiles,
+      num avghumidity,
+      num dailyWillItRain,
+      num dailyChanceOfRain,
+      num dailyWillItSnow,
+      num dailyChanceOfSnow,
       Condition condition,
-      double uv});
+      num uv});
 
   @override
   $ConditionCopyWith<$Res> get condition;
@@ -1945,75 +1955,75 @@ class __$$_DayCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$_Day>
       maxtempC: null == maxtempC
           ? _value.maxtempC
           : maxtempC // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       maxtempF: null == maxtempF
           ? _value.maxtempF
           : maxtempF // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       mintempC: null == mintempC
           ? _value.mintempC
           : mintempC // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       mintempF: null == mintempF
           ? _value.mintempF
           : mintempF // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgtempC: null == avgtempC
           ? _value.avgtempC
           : avgtempC // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgtempF: null == avgtempF
           ? _value.avgtempF
           : avgtempF // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       maxwindMph: null == maxwindMph
           ? _value.maxwindMph
           : maxwindMph // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       maxwindKph: null == maxwindKph
           ? _value.maxwindKph
           : maxwindKph // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       totalprecipMm: null == totalprecipMm
           ? _value.totalprecipMm
           : totalprecipMm // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       totalprecipIn: null == totalprecipIn
           ? _value.totalprecipIn
           : totalprecipIn // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       totalsnowCm: null == totalsnowCm
           ? _value.totalsnowCm
           : totalsnowCm // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgvisKm: null == avgvisKm
           ? _value.avgvisKm
           : avgvisKm // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avgvisMiles: null == avgvisMiles
           ? _value.avgvisMiles
           : avgvisMiles // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       avghumidity: null == avghumidity
           ? _value.avghumidity
           : avghumidity // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyWillItRain: null == dailyWillItRain
           ? _value.dailyWillItRain
           : dailyWillItRain // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyChanceOfRain: null == dailyChanceOfRain
           ? _value.dailyChanceOfRain
           : dailyChanceOfRain // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyWillItSnow: null == dailyWillItSnow
           ? _value.dailyWillItSnow
           : dailyWillItSnow // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dailyChanceOfSnow: null == dailyChanceOfSnow
           ? _value.dailyChanceOfSnow
           : dailyChanceOfSnow // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       condition: null == condition
           ? _value.condition
           : condition // ignore: cast_nullable_to_non_nullable
@@ -2021,15 +2031,15 @@ class __$$_DayCopyWithImpl<$Res> extends _$DayCopyWithImpl<$Res, _$_Day>
       uv: null == uv
           ? _value.uv
           : uv // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
     ));
   }
 }
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_Day implements _Day {
+@jsonSerializable
+class _$_Day extends _Day {
   _$_Day(
       {required this.maxtempC,
       required this.maxtempF,
@@ -2050,50 +2060,51 @@ class _$_Day implements _Day {
       required this.dailyWillItSnow,
       required this.dailyChanceOfSnow,
       required this.condition,
-      required this.uv});
+      required this.uv})
+      : super._();
 
   factory _$_Day.fromJson(Map<String, dynamic> json) => _$$_DayFromJson(json);
 
   @override
-  final double maxtempC;
+  final num maxtempC;
   @override
-  final double maxtempF;
+  final num maxtempF;
   @override
-  final double mintempC;
+  final num mintempC;
   @override
-  final double mintempF;
+  final num mintempF;
   @override
-  final double avgtempC;
+  final num avgtempC;
   @override
-  final double avgtempF;
+  final num avgtempF;
   @override
-  final double maxwindMph;
+  final num maxwindMph;
   @override
-  final double maxwindKph;
+  final num maxwindKph;
   @override
-  final double totalprecipMm;
+  final num totalprecipMm;
   @override
-  final double totalprecipIn;
+  final num totalprecipIn;
   @override
-  final double totalsnowCm;
+  final num totalsnowCm;
   @override
-  final double avgvisKm;
+  final num avgvisKm;
   @override
-  final double avgvisMiles;
+  final num avgvisMiles;
   @override
-  final int avghumidity;
+  final num avghumidity;
   @override
-  final int dailyWillItRain;
+  final num dailyWillItRain;
   @override
-  final int dailyChanceOfRain;
+  final num dailyChanceOfRain;
   @override
-  final int dailyWillItSnow;
+  final num dailyWillItSnow;
   @override
-  final int dailyChanceOfSnow;
+  final num dailyChanceOfSnow;
   @override
   final Condition condition;
   @override
-  final double uv;
+  final num uv;
 
   @override
   String toString() {
@@ -2186,71 +2197,72 @@ class _$_Day implements _Day {
   }
 }
 
-abstract class _Day implements Day {
+abstract class _Day extends Day {
   factory _Day(
-      {required final double maxtempC,
-      required final double maxtempF,
-      required final double mintempC,
-      required final double mintempF,
-      required final double avgtempC,
-      required final double avgtempF,
-      required final double maxwindMph,
-      required final double maxwindKph,
-      required final double totalprecipMm,
-      required final double totalprecipIn,
-      required final double totalsnowCm,
-      required final double avgvisKm,
-      required final double avgvisMiles,
-      required final int avghumidity,
-      required final int dailyWillItRain,
-      required final int dailyChanceOfRain,
-      required final int dailyWillItSnow,
-      required final int dailyChanceOfSnow,
+      {required final num maxtempC,
+      required final num maxtempF,
+      required final num mintempC,
+      required final num mintempF,
+      required final num avgtempC,
+      required final num avgtempF,
+      required final num maxwindMph,
+      required final num maxwindKph,
+      required final num totalprecipMm,
+      required final num totalprecipIn,
+      required final num totalsnowCm,
+      required final num avgvisKm,
+      required final num avgvisMiles,
+      required final num avghumidity,
+      required final num dailyWillItRain,
+      required final num dailyChanceOfRain,
+      required final num dailyWillItSnow,
+      required final num dailyChanceOfSnow,
       required final Condition condition,
-      required final double uv}) = _$_Day;
+      required final num uv}) = _$_Day;
+  _Day._() : super._();
 
   factory _Day.fromJson(Map<String, dynamic> json) = _$_Day.fromJson;
 
   @override
-  double get maxtempC;
+  num get maxtempC;
   @override
-  double get maxtempF;
+  num get maxtempF;
   @override
-  double get mintempC;
+  num get mintempC;
   @override
-  double get mintempF;
+  num get mintempF;
   @override
-  double get avgtempC;
+  num get avgtempC;
   @override
-  double get avgtempF;
+  num get avgtempF;
   @override
-  double get maxwindMph;
+  num get maxwindMph;
   @override
-  double get maxwindKph;
+  num get maxwindKph;
   @override
-  double get totalprecipMm;
+  num get totalprecipMm;
   @override
-  double get totalprecipIn;
+  num get totalprecipIn;
   @override
-  double get totalsnowCm;
+  num get totalsnowCm;
   @override
-  double get avgvisKm;
+  num get avgvisKm;
   @override
-  double get avgvisMiles;
+  num get avgvisMiles;
   @override
-  int get avghumidity;
+  num get avghumidity;
   @override
-  int get dailyWillItRain;
+  num get dailyWillItRain;
   @override
-  int get dailyChanceOfRain;
+  num get dailyChanceOfRain;
   @override
-  int get dailyWillItSnow;
+  num get dailyWillItSnow;
   @override
-  int get dailyChanceOfSnow;
+  num get dailyChanceOfSnow;
   @override
   Condition get condition;
   @override
-  double get uv;
+  num get uv;
   @override
   @JsonKey(ignore: true)
   _$$_DayCopyWith<_$_Day> get copyWith => throw _privateConstructorUsedError;
@@ -2425,8 +2437,8 @@ class __$$_AstroCopyWithImpl<$Res> extends _$AstroCopyWithImpl<$Res, _$_Astro>
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_Astro implements _Astro {
+@jsonSerializable
+class _$_Astro extends _Astro {
   _$_Astro(
       {required this.sunrise,
       required this.sunset,
@@ -2435,7 +2447,8 @@ class _$_Astro implements _Astro {
       required this.moonPhase,
       required this.moonIllumination,
       required this.isMoonUp,
-      required this.isSunUp});
+      required this.isSunUp})
+      : super._();
 
   factory _$_Astro.fromJson(Map<String, dynamic> json) =>
       _$$_AstroFromJson(json);
@@ -2500,7 +2513,7 @@ class _$_Astro implements _Astro {
   }
 }
 
-abstract class _Astro implements Astro {
+abstract class _Astro extends Astro {
   factory _Astro(
       {required final String sunrise,
       required final String sunset,
@@ -2510,6 +2523,7 @@ abstract class _Astro implements Astro {
       required final String moonIllumination,
       required final int isMoonUp,
       required final int isSunUp}) = _$_Astro;
+  _Astro._() : super._();
 
   factory _Astro.fromJson(Map<String, dynamic> json) = _$_Astro.fromJson;
 
@@ -3042,8 +3056,8 @@ class __$$_HourCopyWithImpl<$Res> extends _$HourCopyWithImpl<$Res, _$_Hour>
 
 /// @nodoc
 
-@JsonSerializable()
-class _$_Hour implements _Hour {
+@jsonSerializable
+class _$_Hour extends _Hour {
   _$_Hour(
       {required this.timeEpoch,
       required this.time,
@@ -3077,7 +3091,8 @@ class _$_Hour implements _Hour {
       required this.visMiles,
       required this.gustMph,
       required this.gustKph,
-      required this.uv});
+      required this.uv})
+      : super._();
 
   factory _$_Hour.fromJson(Map<String, dynamic> json) => _$$_HourFromJson(json);
 
@@ -3267,7 +3282,7 @@ class _$_Hour implements _Hour {
   }
 }
 
-abstract class _Hour implements Hour {
+abstract class _Hour extends Hour {
   factory _Hour(
       {required final int timeEpoch,
       required final DateTime time,
@@ -3302,6 +3317,7 @@ abstract class _Hour implements Hour {
       required final double gustMph,
       required final double gustKph,
       required final double uv}) = _$_Hour;
+  _Hour._() : super._();
 
   factory _Hour.fromJson(Map<String, dynamic> json) = _$_Hour.fromJson;
 

@@ -1,11 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:weather_app/data/service/models/temperature_unit.dart';
 
 part 'forecast.freezed.dart';
 part 'forecast.g.dart';
 
+const jsonSerializable = JsonSerializable(
+  fieldRename: FieldRename.snake,
+);
+
 @freezed
 class Forecast with _$Forecast {
-  @JsonSerializable()
+  const Forecast._();
+  @jsonSerializable
   factory Forecast({
     required Location location,
     required Current current,
@@ -18,14 +24,15 @@ class Forecast with _$Forecast {
 
 @freezed
 class Location with _$Location {
-  @JsonSerializable()
+  const Location._();
+  @jsonSerializable
   factory Location({
     required String name,
     required String region,
     required String country,
     required double lat,
     required double lon,
-    required String? tzId,
+    required String tzId,
     required int localtimeEpoch,
     required DateTime localtime,
   }) = _Location;
@@ -36,7 +43,9 @@ class Location with _$Location {
 
 @freezed
 class Current with _$Current {
-  @JsonSerializable()
+  const Current._();
+
+  @jsonSerializable
   factory Current({
     required int lastUpdatedEpoch,
     required DateTime lastUpdated,
@@ -63,6 +72,26 @@ class Current with _$Current {
     required double gustKph,
   }) = _Current;
 
+  double getWindSpeed(UnitType unit) =>
+      unit == UnitType.metric ? windKph : windMph;
+
+  double getTemperature(UnitType unit) =>
+      unit == UnitType.metric ? tempC : tempF;
+
+  double getFeelsLike(UnitType unit) =>
+      unit == UnitType.metric ? feelslikeC : feelslikeF;
+
+  double getPressure(UnitType unit) =>
+      unit == UnitType.metric ? pressureMb : pressureIn;
+
+  double getPrecipitation(UnitType unit) =>
+      unit == UnitType.metric ? precipMm : precipIn;
+
+  double getVisibility(UnitType unit) =>
+      unit == UnitType.metric ? visKm : visMiles;
+
+  double getGust(UnitType unit) => unit == UnitType.metric ? gustKph : gustMph;
+
   factory Current.fromJson(Map<String, dynamic> json) =>
       _$CurrentFromJson(json);
 }
@@ -70,14 +99,15 @@ class Current with _$Current {
 @freezed
 class Condition with _$Condition {
   const Condition._();
-  @JsonSerializable()
+
+  @jsonSerializable
   factory Condition({
     required String text,
     required String icon,
     required int code,
   }) = _Condition;
 
-  get image => "https:$icon";
+  String image() => "https:${icon.replaceAll("64", "128")}";
 
   factory Condition.fromJson(Map<String, dynamic> json) =>
       _$ConditionFromJson(json);
@@ -85,7 +115,8 @@ class Condition with _$Condition {
 
 @freezed
 class ForecastData with _$ForecastData {
-  @JsonSerializable()
+  const ForecastData._();
+  @jsonSerializable
   factory ForecastData({
     required List<ForecastDay> forecastday,
   }) = _ForecastData;
@@ -96,7 +127,8 @@ class ForecastData with _$ForecastData {
 
 @freezed
 class ForecastDay with _$ForecastDay {
-  @JsonSerializable()
+  const ForecastDay._();
+  @jsonSerializable
   factory ForecastDay({
     required String date,
     required int dateEpoch,
@@ -111,36 +143,59 @@ class ForecastDay with _$ForecastDay {
 
 @freezed
 class Day with _$Day {
-  @JsonSerializable()
+  const Day._();
+  @jsonSerializable
   factory Day({
-    required double maxtempC,
-    required double maxtempF,
-    required double mintempC,
-    required double mintempF,
-    required double avgtempC,
-    required double avgtempF,
-    required double maxwindMph,
-    required double maxwindKph,
-    required double totalprecipMm,
-    required double totalprecipIn,
-    required double totalsnowCm,
-    required double avgvisKm,
-    required double avgvisMiles,
-    required int avghumidity,
-    required int dailyWillItRain,
-    required int dailyChanceOfRain,
-    required int dailyWillItSnow,
-    required int dailyChanceOfSnow,
+    required num maxtempC,
+    required num maxtempF,
+    required num mintempC,
+    required num mintempF,
+    required num avgtempC,
+    required num avgtempF,
+    required num maxwindMph,
+    required num maxwindKph,
+    required num totalprecipMm,
+    required num totalprecipIn,
+    required num totalsnowCm,
+    required num avgvisKm,
+    required num avgvisMiles,
+    required num avghumidity,
+    required num dailyWillItRain,
+    required num dailyChanceOfRain,
+    required num dailyWillItSnow,
+    required num dailyChanceOfSnow,
     required Condition condition,
-    required double uv,
+    required num uv,
   }) = _Day;
+
+  num maxTempreture(UnitType unit) =>
+      unit == UnitType.metric ? maxtempC : maxtempF;
+
+  num minTempreture(UnitType unit) =>
+      unit == UnitType.metric ? mintempC : mintempF;
+
+  num avgTempreture(UnitType unit) =>
+      unit == UnitType.metric ? avgtempC : avgtempF;
+
+  num maxWind(UnitType unit) =>
+      unit == UnitType.metric ? maxwindKph : maxwindMph;
+
+  num totalPrecipitation(UnitType unit) =>
+      unit == UnitType.metric ? totalprecipMm : totalprecipIn;
+
+  num totalSnow(UnitType unit) =>
+      unit == UnitType.metric ? totalsnowCm : totalsnowCm;
+
+  num avgVisibility(UnitType unit) =>
+      unit == UnitType.metric ? avgvisKm : avgvisMiles;
 
   factory Day.fromJson(Map<String, dynamic> json) => _$DayFromJson(json);
 }
 
 @freezed
 class Astro with _$Astro {
-  @JsonSerializable()
+  const Astro._();
+  @jsonSerializable
   factory Astro({
     required String sunrise,
     required String sunset,
@@ -157,7 +212,8 @@ class Astro with _$Astro {
 
 @freezed
 class Hour with _$Hour {
-  @JsonSerializable()
+  const Hour._();
+  @jsonSerializable
   factory Hour({
     required int timeEpoch,
     required DateTime time,
@@ -193,6 +249,35 @@ class Hour with _$Hour {
     required double gustKph,
     required double uv,
   }) = _Hour;
+
+  double getTemperature(UnitType unit) =>
+      unit == UnitType.metric ? tempC : tempF;
+
+  double getFeelsLike(UnitType unit) =>
+      unit == UnitType.metric ? feelslikeC : feelslikeF;
+
+  double getWindSpeed(UnitType unit) =>
+      unit == UnitType.metric ? windKph : windMph;
+
+  double getWindChill(UnitType unit) =>
+      unit == UnitType.metric ? windchillC : windchillF;
+
+  double getHeatIndex(UnitType unit) =>
+      unit == UnitType.metric ? heatindexC : heatindexF;
+
+  double getDewPoint(UnitType unit) =>
+      unit == UnitType.metric ? dewpointC : dewpointF;
+
+  double getVisibility(UnitType unit) =>
+      unit == UnitType.metric ? visKm : visMiles;
+
+  double getGust(UnitType unit) => unit == UnitType.metric ? gustKph : gustMph;
+
+  double getPressure(UnitType unit) =>
+      unit == UnitType.metric ? pressureMb : pressureIn;
+
+  double getPrecipitation(UnitType unit) =>
+      unit == UnitType.metric ? precipMm : precipIn;
 
   factory Hour.fromJson(Map<String, dynamic> json) => _$HourFromJson(json);
 }

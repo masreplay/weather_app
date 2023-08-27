@@ -7,7 +7,7 @@ part of 'saved_place_provider.dart';
 // **************************************************************************
 
 String _$savedPlacePreferenceHash() =>
-    r'dd61f621d867e04a76d9fa7f61b55814d20e6134';
+    r'5a119c869b71c6c8e6212afd7475a12eb8a3646c';
 
 /// See also [SavedPlacePreference].
 @ProviderFor(SavedPlacePreference)

@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:weather_app/data/repositories/forecast_repository.dart';
 import 'package:weather_app/data/service/clients/forecast_client.dart';
@@ -11,7 +12,7 @@ part 'today_weather_provider.g.dart';
 Future<Forecast?> getTodayForecast(GetTodayForecastRef ref) async {
   final savedPlace = ref.watch(savedPlacePreferenceProvider);
 
-  logger.v(savedPlace);
+  logger.log(Level.trace, savedPlace);
   if (savedPlace == null) return null;
 
   return ref
