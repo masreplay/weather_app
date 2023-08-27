@@ -24,12 +24,12 @@
     "hourlyForecast": "التوقعات الساعية",
     "sunrise": "شروق الشمس",
     "sunset": "غروب الشمس",
-    "percent": "نسبة",
+    "percent": "{value}%",
     "uvIndex": "مؤشر الأشعة فوق البنفسجية",
     "pressure": "الضغط",
-    "speedUnit": "وحدة السرعة",
+    "speedUnit": "{value} {unit, select, metric{كم/س} imperial{ميل/س} other{كم/س}}",
     "gust": "هبات",
     "visibility": "الرؤية",
-    "pressureUnit": "وحدة الضغط",
-    "temperatureUnit": "وحدة الحرارة"
+    "pressureUnit": "{value} {unit, select, mb{مب} hPa{هس} other{مب}}",
+    "temperatureUnit": "{value} {unit, select, celsius{س} fahrenheit{ف} other{س}}°"
 }
