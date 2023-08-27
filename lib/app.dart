@@ -1,4 +1,5 @@
 import 'package:weather_app/common_lib.dart';
+import 'package:weather_app/gen/assets.gen.dart';
 import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/src/settings/settings_provider.dart';
 
@@ -13,6 +14,18 @@ class MainApp extends StatefulHookConsumerWidget {
 
 class _MainAppState extends ConsumerState<MainApp> {
   final _appRouter = AppRouter();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    /// Cache assets before app start
+    final images = [Assets.hour.night];
+
+    for (var image in images) {
+      precacheImage(AssetImage(image.path), context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

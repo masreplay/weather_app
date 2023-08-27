@@ -2,6 +2,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/gen/assets.gen.dart';
 import 'package:weather_app/router/app_router.dart';
+import 'package:weather_app/src/main/flex_padded.dart';
 import 'package:weather_app/src/main/search/search_page.dart';
 
 extension on ScrollMetrics {
@@ -20,7 +21,6 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // records
     final routes = [
       (
         route: const TodayWeatherRoute(),
@@ -38,32 +38,36 @@ class MainPage extends StatelessWidget {
         label: 'Forecast',
       ),
     ];
+    final theme = Theme.of(context);
 
     return AutoTabsRouter.tabBar(
       routes: [for (final route in routes) route.route],
       builder: (context, child, controller) {
         final router = AutoTabsRouter.of(context);
 
+        final tabs = List.generate(routes.length, (index) {
+          final route = routes[index];
+          return Expanded(
+            child: TabButton(
+              text: Text(route.label),
+              selected: router.activeIndex == index,
+            ),
+          );
+        });
+
         return HookConsumer(
           builder: (context, ref, child) {
-            final theme = Theme.of(context);
-
             final scrolledTo = useState(false);
             final collapsedHeight = MediaQuery.sizeOf(context).height / 4;
             final expandedHeight = MediaQuery.sizeOf(context).height / 2;
+
+            final textColor =
+                scrolledTo.value ? theme.colorScheme.onSurface : Colors.white;
 
             const borderRadius = BorderRadius.only(
               bottomLeft: Radius.circular(36),
               bottomRight: Radius.circular(36),
             );
-
-            final List<Widget> tabs = List.generate(routes.length, (index) {
-              final route = routes[index];
-              return TabButton(
-                text: Text(route.label),
-                selected: router.activeIndex == index,
-              );
-            });
 
             return Scaffold(
               body: NotificationListener(
@@ -81,15 +85,14 @@ class MainPage extends StatelessWidget {
                 child: CustomScrollView(
                   slivers: [
                     SliverAppBar(
-                      foregroundColor: scrolledTo.value
-                          ? theme.colorScheme.onSurface
-                          : Colors.white,
+                      foregroundColor: textColor,
                       pinned: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: borderRadius,
                       ),
-                      actions: const [],
-                      title: const SearchAppBar(),
+                      title: SearchAppBar(
+                        foregroundColor: textColor,
+                      ),
                       collapsedHeight: collapsedHeight,
                       expandedHeight: expandedHeight,
                       flexibleSpace: ClipRRect(
@@ -97,6 +100,7 @@ class MainPage extends StatelessWidget {
                         child: FlexibleSpaceBar(
                           collapseMode: CollapseMode.parallax,
                           background: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Expanded(
                                 child: ClipRRect(
@@ -106,8 +110,13 @@ class MainPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const Gap(16),
-                              Row(children: tabs)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
+                                child: RowPadded(children: tabs),
+                              )
                             ],
                           ),
                         ),
@@ -142,16 +151,20 @@ class TabButton extends StatelessWidget {
     final theme = Theme.of(context);
 
     return DefaultTextStyle(
-      style: theme.textTheme.labelLarge!.copyWith(
+      style: theme.textTheme.titleMedium!.copyWith(
+        fontWeight: FontWeight.bold,
         color: selected
-            ? theme.colorScheme.onSurface
-            : theme.colorScheme.onSecondaryContainer,
+            ? theme.colorScheme.onSecondaryContainer
+            : theme.colorScheme.onSurface,
       ),
       child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: selected
               ? theme.colorScheme.secondaryContainer
               : theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(12),
         ),
         child: text,
       ),

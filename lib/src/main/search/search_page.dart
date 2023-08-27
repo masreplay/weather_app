@@ -14,24 +14,33 @@ Future<List<Place>> search(SearchRef ref, SearchQueries queries) =>
 
 /// A widget that exposes a [SearchAnchorController].
 class SearchAppBar extends ConsumerWidget {
-  const SearchAppBar({super.key});
+  const SearchAppBar({
+    super.key,
+    required this.foregroundColor,
+  });
+
+  final Color foregroundColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final savedPlace = ref.watch(savedPlacePreferenceProvider);
+    final theme = Theme.of(context);
 
     return SearchAnchor(
       builder: (context, controller) {
-        return SearchBar(
-          elevation: const MaterialStatePropertyAll(0),
+        return TextField(
           controller: controller,
-          padding: const MaterialStatePropertyAll(
-            EdgeInsets.symmetric(horizontal: 16.0),
+          enabled: false,
+          style: theme.textTheme.titleLarge?.copyWith(color: foregroundColor),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            suffixIcon: Icon(
+              Icons.search,
+              color: foregroundColor,
+            ),
           ),
           onTap: () => controller.openView(),
           onChanged: (_) => controller.openView(),
-          leading: const Icon(Icons.search),
-          trailing: const [ThemeIconButton()],
         );
       },
       suggestionsBuilder: (context, controller) async {
