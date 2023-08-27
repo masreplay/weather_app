@@ -15,6 +15,7 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
   Widget build(BuildContext context) {
     final provider = getTodayForecastProvider;
     final state = ref.watch(provider);
+
     return state.when(
       data: (data) {
         if (data == null) return Container();

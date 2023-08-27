@@ -3,5 +3,7 @@
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
     "settings": "Settings",
-    "language": "Language"
+    "language": "Language",
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit"
 }

@@ -3,6 +3,8 @@
     "darkMode",
     "lightMode",
     "settings",
-    "language"
+    "language",
+    "celsius",
+    "fahrenheit"
   ]
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:weather_app/data/cache/preferences.dart';
+import 'package:weather_app/data/service/models/temperature_unit.dart';
 import 'package:weather_app/riverpod/persistance_provider.dart';
 
 part 'settings_provider.freezed.dart';
@@ -14,6 +15,7 @@ class AppSettings with _$AppSettings {
 
   @JsonSerializable(explicitToJson: true)
   factory AppSettings({
+    @Default(TemperatureUnit.celsius) TemperatureUnit temperatureUnit,
     @LocaleJsonConverter() Locale? locale,
     @ThemeModeJsonConvertor() @Default(ThemeMode.system) ThemeMode themeMode,
   }) = _AppSettings;
@@ -23,10 +25,11 @@ class AppSettings with _$AppSettings {
 }
 
 /// Cache [AppSettings] as Json and reload it when app starts
-/// 
+///
 /// with the help of [PersistanceProvider]
 @riverpod
-class SettingsPreference extends _$SettingsPreference with PersistanceProviderMixin {
+class SettingsPreference extends _$SettingsPreference
+    with PersistanceProviderMixin {
   @override
   @protected
   String get key => Preferences.settings;
