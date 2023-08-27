@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather_app/common_lib.dart';
+import 'package:weather_app/router/app_router.dart';
 
 @RoutePage()
 class TodayWeatherPage extends StatefulHookConsumerWidget {
@@ -42,7 +43,9 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
               actions: [
                 if (kDebugMode) Text(scrolledTo.value.toString()),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.router.push(const SearchRoute());
+                  },
                   icon: const Icon(Icons.search),
                 ),
               ],
