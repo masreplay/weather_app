@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/data/repositories/search_repository.dart';
 import 'package:weather_app/data/service/service.dart';
+import 'package:weather_app/src/main/search/saved_place_provider.dart';
 import 'package:weather_app/src/settings/settings_provider.dart';
 
 part 'search_page.g.dart';
@@ -17,9 +18,12 @@ class SearchAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final savedPlace = ref.watch(savedPlacePreferenceProvider);
+
     return SearchAnchor(
       builder: (context, controller) {
         return SearchBar(
+          elevation: const MaterialStatePropertyAll(0),
           controller: controller,
           padding: const MaterialStatePropertyAll(
             EdgeInsets.symmetric(horizontal: 16.0),
@@ -39,9 +43,20 @@ class SearchAppBar extends ConsumerWidget {
 
         return List.generate(state.length, (index) {
           final place = state[index];
-
+          final isSelected = savedPlace?.id == place.id;
           return ListTile(
             title: Text(place.name),
+            subtitle: Text(place.country),
+            trailing:
+                isSelected ? const Icon(Icons.arrow_outward_outlined) : null,
+            selected: isSelected,
+            onTap: () {
+              ref
+                  .read(savedPlacePreferenceProvider.notifier)
+                  .updateValue(place);
+              controller.closeView(place.name);
+              FocusScope.of(context).unfocus();
+            },
           );
         });
       },

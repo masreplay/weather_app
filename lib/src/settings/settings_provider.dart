@@ -26,7 +26,7 @@ class AppSettings with _$AppSettings {
 /// 
 /// with the help of [PersistanceProvider]
 @riverpod
-class SettingsPreference extends _$SettingsPreference with PersistanceProvider {
+class SettingsPreference extends _$SettingsPreference with PersistanceProviderMixin {
   @override
   @protected
   String get key => Preferences.settings;

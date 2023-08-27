@@ -40,7 +40,7 @@ Json? _$JsonConverterToJson<Json, Value>(
 // **************************************************************************
 
 String _$settingsPreferenceHash() =>
-    r'eaee9f606977f772d7a60f6d68fec504ced914cc';
+    r'7b31c5da6bf6ae71d850e74b97d40b2099c6f19a';
 
 /// Cache [AppSettings] as Json and reload it when app starts
 ///
