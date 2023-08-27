@@ -10,6 +10,7 @@ Dio dio(DioRef ref) {
 
   dio.interceptors.addAll([
     Authenticator(),
+    LogInterceptor(responseBody: true),
   ]);
 
   return dio;

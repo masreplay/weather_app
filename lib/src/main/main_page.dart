@@ -49,6 +49,9 @@ class MainPage extends StatelessWidget {
           final route = routes[index];
           return Expanded(
             child: TabButton(
+              onTap: () {
+                router.setActiveIndex(index);
+              },
               text: Text(route.label),
               selected: router.activeIndex == index,
             ),
@@ -139,16 +142,19 @@ class MainPage extends StatelessWidget {
 class TabButton extends StatelessWidget {
   final Text text;
   final bool selected;
+  final VoidCallback onTap;
 
   const TabButton({
     super.key,
     required this.text,
     required this.selected,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final borderRadius = BorderRadius.circular(12);
 
     return DefaultTextStyle(
       style: theme.textTheme.titleMedium!.copyWith(
@@ -157,16 +163,21 @@ class TabButton extends StatelessWidget {
             ? theme.colorScheme.onSecondaryContainer
             : theme.colorScheme.onSurface,
       ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: selected
-              ? theme.colorScheme.secondaryContainer
-              : theme.colorScheme.surface,
-          borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        borderRadius: borderRadius,
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: selected
+                ? theme.colorScheme.secondaryContainer
+                : theme.colorScheme.surface,
+            borderRadius: borderRadius,
+          ),
+          child: text,
         ),
-        child: text,
       ),
     );
   }

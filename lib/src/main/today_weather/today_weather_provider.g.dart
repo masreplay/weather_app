@@ -1,27 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'saved_place_provider.dart';
+part of 'today_weather_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$savedPlacePreferenceHash() =>
-    r'dd61f621d867e04a76d9fa7f61b55814d20e6134';
+String _$getTodayForecastHash() => r'ddfa3c2352f837ee30f7fbbb6749aa24ce87b542';
 
-/// See also [SavedPlacePreference].
-@ProviderFor(SavedPlacePreference)
-final savedPlacePreferenceProvider =
-    AutoDisposeNotifierProvider<SavedPlacePreference, Place?>.internal(
-  SavedPlacePreference.new,
-  name: r'savedPlacePreferenceProvider',
+/// See also [getTodayForecast].
+@ProviderFor(getTodayForecast)
+final getTodayForecastProvider = AutoDisposeFutureProvider<Forecast?>.internal(
+  getTodayForecast,
+  name: r'getTodayForecastProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$savedPlacePreferenceHash,
+      : _$getTodayForecastHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SavedPlacePreference = AutoDisposeNotifier<Place?>;
+typedef GetTodayForecastRef = AutoDisposeFutureProviderRef<Forecast?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
