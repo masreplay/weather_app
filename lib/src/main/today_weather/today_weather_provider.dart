@@ -9,7 +9,7 @@ part 'today_weather_provider.g.dart';
 const String defaultPlace = "Baghdad";
 
 @riverpod
-Future<Forecast?> getTodayForecast(GetTodayForecastRef ref) async {
+Future<Forecast> getTodayForecast(GetTodayForecastRef ref) async {
   final savedPlace = ref.watch(savedPlacePreferenceProvider);
 
   return ref

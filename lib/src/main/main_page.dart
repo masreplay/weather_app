@@ -3,6 +3,8 @@ import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/src/main/sliver_header.dart';
 import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
+import 'package:weather_app/src/widgets/flex_padded.dart';
+import 'package:weather_app/theme.dart';
 
 typedef TabRoute = ({
   IconData icon,
@@ -36,9 +38,17 @@ class MainPage extends HookConsumerWidget {
                   controller: controller,
                   routes: routes,
                 ),
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: NavigationTabsDelegate(
+                    router: router,
+                    routes: routes,
+                  ),
+                ),
                 SliverFillRemaining(
                   child: child,
-                )
+                ),
+                // child,
               ],
             ),
           ),
@@ -68,4 +78,47 @@ class MainPage extends HookConsumerWidget {
       ),
     ];
   }
+}
+
+class NavigationTabsDelegate extends SliverPersistentHeaderDelegate {
+  final List<TabRoute> routes;
+  final TabsRouter router;
+
+  const NavigationTabsDelegate({
+    required this.routes,
+    required this.router,
+  });
+
+  @override
+  Widget build(context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Theme.of(context).colorScheme.background,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Insets.medium,
+        vertical: Insets.small,
+      ),
+      child: RowPadded(
+        gap: Insets.medium,
+        children: List.generate(routes.length, (index) {
+          final route = routes[index];
+          return Expanded(
+            child: TabButton(
+              selected: router.activeIndex == index,
+              text: Text(route.label),
+              onTap: () => router.setActiveIndex(index),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 72;
+
+  @override
+  double get minExtent => 72;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => false;
 }

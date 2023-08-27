@@ -1,5 +1,5 @@
 import 'package:weather_app/common_lib.dart';
-import 'package:weather_app/src/main/flex_padded.dart';
+import 'package:weather_app/src/widgets/flex_padded.dart';
 
 class DataListTile extends StatelessWidget {
   const DataListTile({

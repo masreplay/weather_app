@@ -1,17 +1,17 @@
 import 'dart:ui';
 
-import 'package:flutter/services.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/data/service/models/temperature_unit.dart';
 import 'package:weather_app/gen/assets.gen.dart';
-import 'package:weather_app/src/main/flex_padded.dart';
+import 'package:weather_app/l10n/localization.dart';
 import 'package:weather_app/src/main/main_page.dart';
 import 'package:weather_app/src/main/search/search_page.dart';
-import 'package:weather_app/src/main/today_weather/localization.dart';
 import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
 import 'package:weather_app/src/settings/settings_provider.dart';
+import 'package:weather_app/src/widgets/flex_padded.dart';
 import 'package:weather_app/theme.dart';
 
 const _expandedBorderRadius = BorderRadius.only(
@@ -36,13 +36,11 @@ class SliverHeader extends HookConsumerWidget {
     final scrolledTo = useState(false);
 
     final size = MediaQuery.sizeOf(context);
-    final collapsedHeight = size.height / 5;
-    final expandedHeight = size.height / 2;
 
     controller.addListener(() {
       scrolledTo.value = controller.position.isScrolledTo(
         amount: 0.5,
-        min: controller.position.minScrollExtent - 64,
+        min: controller.position.minScrollExtent,
         max: controller.position.maxScrollExtent,
       );
     });
@@ -54,23 +52,9 @@ class SliverHeader extends HookConsumerWidget {
     final textColor =
         scrolledTo.value ? theme.colorScheme.onSurface : Colors.white;
 
-    final tabs = List.generate(routes.length, (index) {
-      final route = routes[index];
-      return Expanded(
-        child: TabButton(
-          selected: router.activeIndex == index,
-          text: Text(route.label),
-          onTap: () => router.setActiveIndex(index),
-        ),
-      );
-    });
-
     return SliverAppBar(
       foregroundColor: textColor,
       pinned: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: _expandedBorderRadius,
-      ),
       actions: [
         IconButton(
           onPressed: () {},
@@ -78,40 +62,19 @@ class SliverHeader extends HookConsumerWidget {
         )
       ],
       title: SearchAppBar(foregroundColor: textColor),
-      collapsedHeight: collapsedHeight,
-      expandedHeight: expandedHeight,
-      flexibleSpace: ClipRRect(
-        borderRadius: _expandedBorderRadius,
-        child: FlexibleSpaceBar(
-          background: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    CurrentDaySection(
-                      unitType: settings.unitType,
-                      foregroundColor: textColor,
-                    ),
-                    CurrentWeatherSection(
-                      unitType: settings.unitType,
-                      foregroundColor: textColor,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Insets.medium,
-                  vertical: Insets.small,
-                ),
-                child: RowPadded(
-                  gap: Insets.medium,
-                  children: tabs,
-                ),
-              )
-            ],
-          ),
+      expandedHeight: size.height / 2,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Stack(
+          children: [
+            CurrentDaySection(
+              unitType: settings.unitType,
+              foregroundColor: textColor,
+            ),
+            CurrentWeatherSection(
+              unitType: settings.unitType,
+              foregroundColor: textColor,
+            ),
+          ],
         ),
       ),
     );
@@ -132,7 +95,8 @@ class CurrentDaySection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ClipRRect(
       borderRadius: _expandedBorderRadius,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: ExactAssetImage(Assets.hour.night.path),
@@ -240,10 +204,9 @@ class CurrentWeatherSection extends ConsumerWidget {
         ).add(const EdgeInsets.only(top: kToolbarHeight)),
         child: state.maybeWhen(
           data: (data) {
-            if (data == null) return const SizedBox.shrink();
-
             final day = data.forecast.forecastday.first.day;
-            return Column(
+
+            return ColumnPadded(
               children: [
                 Expanded(
                   child: Row(
@@ -271,8 +234,8 @@ class CurrentWeatherSection extends ConsumerWidget {
                               color: foregroundColor,
                               shape: BoxShape.circle,
                             ),
-                            child: Image.network(
-                              data.current.condition.image(),
+                            child: CachedNetworkImage(
+                              imageUrl: data.current.condition.image(),
                               height: 72,
                               width: 72,
                             ),
