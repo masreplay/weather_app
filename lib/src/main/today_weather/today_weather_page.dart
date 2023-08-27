@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather_app/common_lib.dart';
-import 'package:weather_app/router/app_router.dart';
+import 'package:weather_app/src/main/search/search_page.dart';
 
 @RoutePage()
 class TodayWeatherPage extends StatefulHookConsumerWidget {
@@ -31,6 +30,7 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
               min: collapsedHeight,
             );
           }
+
           return true;
         },
         child: CustomScrollView(
@@ -40,16 +40,8 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
               foregroundColor:
                   scrolledTo.value ? theme.colorScheme.onSurface : Colors.white,
               pinned: true,
-              actions: [
-                if (kDebugMode) Text(scrolledTo.value.toString()),
-                IconButton(
-                  onPressed: () {
-                    context.router.push(const SearchRoute());
-                  },
-                  icon: const Icon(Icons.search),
-                ),
-              ],
-              title: const Text("بغداد العراق"),
+              actions: const [],
+              title: const SearchAppBar(),
               collapsedHeight: collapsedHeight,
               expandedHeight: expandedHeight,
               flexibleSpace: ClipRRect(

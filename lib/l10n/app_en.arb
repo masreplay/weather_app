@@ -1,3 +1,7 @@
 {
-    "today": "Today"
+    "today": "Today",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "settings": "Settings",
+    "language": "Language"
 }

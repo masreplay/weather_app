@@ -8,7 +8,9 @@ part of 'search_repository.dart';
 
 String _$searchRepositoryHash() => r'd53c8e8ede3bb4734ed9c87841c378e60004198a';
 
-/// See also [searchRepository].
+/// dependency injection for the repository [SearchRepository]
+///
+/// Copied from [searchRepository].
 @ProviderFor(searchRepository)
 final searchRepositoryProvider = AutoDisposeProvider<SearchRepository>.internal(
   searchRepository,
