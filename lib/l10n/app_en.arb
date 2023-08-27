@@ -5,5 +5,7 @@
     "settings": "Settings",
     "language": "Language",
     "celsius": "Celsius",
-    "fahrenheit": "Fahrenheit"
+    "fahrenheit": "Fahrenheit",
+    "defaultErrorMessage": "Something went wrong. Please try again later.",
+    "retry": "Retry"
 }

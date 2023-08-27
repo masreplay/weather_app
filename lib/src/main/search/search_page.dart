@@ -28,6 +28,8 @@ class SearchAppBar extends ConsumerWidget {
 
     return SearchAnchor(
       builder: (context, controller) {
+        if (controller.text.isEmpty) controller.text = savedPlace?.name ?? '';
+        
         return TextField(
           controller: controller,
           enabled: false,
@@ -44,6 +46,8 @@ class SearchAppBar extends ConsumerWidget {
         );
       },
       suggestionsBuilder: (context, controller) async {
+        if (controller.text.isEmpty) return [];
+
         // Use .future to read the state of a FutureProvider
         // and throw an error if the future is not completed.
         final state = await ref.read(

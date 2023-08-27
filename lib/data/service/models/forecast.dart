@@ -25,7 +25,7 @@ class Location with _$Location {
     required String country,
     required double lat,
     required double lon,
-    required String tzId,
+    required String? tzId,
     required int localtimeEpoch,
     required DateTime localtime,
   }) = _Location;

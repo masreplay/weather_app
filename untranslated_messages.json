@@ -5,6 +5,8 @@
     "settings",
     "language",
     "celsius",
-    "fahrenheit"
+    "fahrenheit",
+    "defaultErrorMessage",
+    "retry"
   ]
 }

@@ -14,7 +14,7 @@ class SavedPlacePreference extends _$SavedPlacePreference
   String get key => Preferences.savedPlace;
 
   @override
-  Place? build() => null;
+  Place? build() => firstBuild();
 
   @override
   Place fromJson(Map<String, dynamic> map) => Place.fromJson(map);

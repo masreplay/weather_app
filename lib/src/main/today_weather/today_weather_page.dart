@@ -1,5 +1,7 @@
 import 'package:weather_app/common_lib.dart';
 import 'package:weather_app/src/main/flex_padded.dart';
+import 'package:weather_app/src/main/today_weather/default_error_widget.dart';
+import 'package:weather_app/src/main/today_weather/default_loading_widget.dart';
 import 'package:weather_app/src/main/today_weather/today_weather_provider.dart';
 
 @RoutePage()
@@ -22,6 +24,11 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
 
         return ColumnPadded(
           children: [
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.red,
+            ),
             ListTile(
               title: Text(data.location.name),
               subtitle: Text(data.location.region),
@@ -33,15 +40,12 @@ class _TodayWeatherPageState extends ConsumerState<TodayWeatherPage> {
           ],
         );
       },
-      error: (error, stackTrace) => ColumnPadded(
-        children: [
-          Text(error.toString()),
-          Text(stackTrace.toString()),
-        ],
+      error: (error, stackTrace) => DefaultErrorWidget(
+        error: error,
+        stackTrace: stackTrace,
+        refresh: () => ref.refresh(provider),
       ),
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
-      ),
+      loading: DefaultLoadingWidget.new,
     );
   }
 }

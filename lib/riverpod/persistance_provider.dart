@@ -98,4 +98,17 @@ mixin PersistanceNullableProviderMixin<State extends Object?>
       return state;
     }
   }
+
+  State? firstBuild() {
+    final raw = ref.read(sharedPreferencesProvider).getString(key);
+    if (raw == null) return null;
+    try {
+      log(raw.toString());
+      final Map<String, dynamic> map = jsonDecode(raw);
+      return fromJson(map);
+    } catch (e, stackTrace) {
+      log("Preference: $key", error: e, stackTrace: stackTrace);
+      return null;
+    }
+  }
 }

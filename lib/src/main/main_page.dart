@@ -5,16 +5,6 @@ import 'package:weather_app/router/app_router.dart';
 import 'package:weather_app/src/main/flex_padded.dart';
 import 'package:weather_app/src/main/search/search_page.dart';
 
-extension on ScrollMetrics {
-  // if x the space between the expanded height and the collapsed height is scrolled
-  bool isScrolled({
-    required double amount,
-    required double min,
-    required double max,
-  }) =>
-      pixels >= (max - min) * amount;
-}
-
 @RoutePage()
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -59,7 +49,7 @@ class MainPage extends StatelessWidget {
         });
 
         return HookConsumer(
-          builder: (context, ref, child) {
+          builder: (context, ref, _) {
             final scrolledTo = useState(false);
             final collapsedHeight = MediaQuery.sizeOf(context).height / 4;
             final expandedHeight = MediaQuery.sizeOf(context).height / 2;
@@ -127,7 +117,7 @@ class MainPage extends StatelessWidget {
                     ),
                     SliverFillRemaining(
                       child: child,
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -137,6 +127,16 @@ class MainPage extends StatelessWidget {
       },
     );
   }
+}
+
+extension on ScrollMetrics {
+  // if x the space between the expanded height and the collapsed height is scrolled
+  bool isScrolled({
+    required double amount,
+    required double min,
+    required double max,
+  }) =>
+      pixels >= (max - min) * amount;
 }
 
 class TabButton extends StatelessWidget {
