@@ -1,6 +1,7 @@
 ### The Weather App
 - Please the TODO.md file for task details
 - The project now only tested on Android
+- Did't change app icon or splash screen, app Name
 
 ## Requirements
 - To run the app on Android just run the following command in the root directory of the project:
