@@ -20,6 +20,7 @@ const _expandedBorderRadius = BorderRadius.only(
   bottomRight: Radius.circular(36),
 );
 
+/// Represents the header of the [MainPage].
 class SliverHeader extends HookConsumerWidget {
   const SliverHeader({
     super.key,
@@ -96,13 +97,20 @@ class CurrentDaySection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final provider = forecastProviderProvider;
+    final state = ref.watch(provider);
+
     return ClipRRect(
       borderRadius: _expandedBorderRadius,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: ExactAssetImage(Assets.hour.night.path),
+            image: ExactAssetImage(
+              state.maybeWhen(
+                orElse: () => Assets.hour.day.path,
+              ),
+            ),
             fit: BoxFit.cover,
           ),
         ),
