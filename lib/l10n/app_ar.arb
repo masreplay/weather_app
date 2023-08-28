@@ -21,7 +21,7 @@
     "rainChance": "فرصة الأمطار",
     "max": "الأقصى",
     "min": "الأدنى",
-    "hourlyForecast": "التوقعات الساعية",
+    "hourlyForecast": "التوقعات كل ساعة",
     "sunrise": "شروق الشمس",
     "sunset": "غروب الشمس",
     "percent": "{value}%",
