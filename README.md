@@ -1,7 +1,6 @@
 ### The Weather App
 - Please the TODO.md file for task details
 - The project now only tested on Android
-Didn't change app icon or splash screen, app Name
 
 ### Features
 - Riverpod for state management
@@ -14,23 +13,20 @@ Didn't change app icon or splash screen, app Name
 - gap for spacing
 - freezed, json_serializable for schema and serialization
 
-
 ## Requirements
 - To run the app on Android just run the following command in the root directory of the project:
 ```
 flutter run
 ```
-
 - or to build
 ```
 flutter build apk
 ```
 
-
 ## Screenshots
 - Check the screenshots folder for the screenshots
 
-## Extra bonus 
+## Extra bonus
 - Support deep linking
   - https://weatherapp.com/today
   - https://weatherapp.com/towomorrow
@@ -40,3 +36,4 @@ flutter build apk
 - localization
   - English
   - Arabic
+- Change Android app icon, app Name
