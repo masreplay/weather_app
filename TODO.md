@@ -26,10 +26,10 @@ Description: Design and develop a weather application that fetches weather data 
 - Implement a simple form of data persistence (e.g., SharedPreferences or Hive) to save the user's last searched city and display it upon app launch. ✅
 
 **Unit Testing**
-- Write unit tests for critical parts of the application, such as API calls, data parsing, and state management. ❌ (i didn't have time to do this, but i can send you a link to a repo where i have done this before or we can talk about it in the interview)
+- Write unit tests for critical parts of the application, such as API calls, data parsing, and state management. ❌ (i didn't have time to do this, but i can send you a link to a repo where i have done this before or we can talk about it in the interview, usually i use mockito and riverpod built in test for this)
 
 **Responsive Design**
-- Ensure that the app's UI is responsive and works well on different screen sizes and orientations. ❌ (i didn't have time to do this, but i can send you a link to a repo where i have done this before or we can talk about it in the interview)
+- Ensure that the app's UI is responsive and works well on different screen sizes and orientations. ❌ (i didn't have time to do this, but i can send you a link to a repo where i have done this before or we can talk about it in the interview, usually i use adaptive_breakpoints)
 
 **Documentation**
 - Provide clear comments in your code to explain the functionality of different components and logic. ✅

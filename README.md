@@ -1,5 +1,6 @@
 ### The Weather App
-Please the TODO.md file for task details
+- Please the TODO.md file for task details
+- The project now only tested on Android
 
 ## Requirements
 - To run the app on Android just run the following command in the root directory of the project:
@@ -14,8 +15,7 @@ flutter build apk
 
 
 ## Screenshots
-- check the screenshots folder for the screenshots
-
+- Check the screenshots folder for the screenshots
 
 ## Extra bonus 
 - Support deep linking
