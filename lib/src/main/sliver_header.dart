@@ -142,7 +142,7 @@ extension on ScrollMetrics {
 }
 
 class TabButton extends StatelessWidget {
-  final Text text;
+  final String text;
   final bool selected;
   final VoidCallback onTap;
 
@@ -170,10 +170,6 @@ class TabButton extends StatelessWidget {
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          padding: const EdgeInsets.symmetric(
-            horizontal: Insets.medium,
-            vertical: Insets.medium,
-          ),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: selected
@@ -181,7 +177,11 @@ class TabButton extends StatelessWidget {
                 : theme.colorScheme.surfaceVariant,
             borderRadius: borderRadius,
           ),
-          child: text,
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );

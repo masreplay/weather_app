@@ -105,7 +105,7 @@ class NavigationTabsDelegate extends SliverPersistentHeaderDelegate {
           return Expanded(
             child: TabButton(
               selected: router.activeIndex == index,
-              text: Text(route.label),
+              text: route.label,
               onTap: () {
                 router.setActiveIndex(index);
               },
