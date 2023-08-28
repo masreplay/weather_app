@@ -14,3 +14,16 @@ flutter build apk
 
 
 ## Screenshots
+- check the screenshots folder for the screenshots
+
+
+## Extra bonus 
+- Support deep linking
+  - https://weatherapp.com/today
+  - https://weatherapp.com/towomorrow
+  - https://weatherapp.com/forecast
+  - https://weatherapp.com/settings
+
+- localization
+  - English
+  - Arabic

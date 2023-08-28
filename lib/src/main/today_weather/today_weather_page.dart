@@ -75,30 +75,23 @@ class ForecastBody extends HookConsumerWidget {
           gridDelegate: gridDelegate,
           children: [
             ItemListTile(
-              title: Text(l10n.windSpeed),
+              titleText: l10n.windSpeed,
               icon: Icons.air_outlined,
-              subtitle: Text(
-                l10n.speed(unitSystem, forecast.day.maxWind),
-              ),
+              subtitleText: l10n.speed(unitSystem, forecast.day.maxWind),
             ),
             ItemListTile(
-              title: Text(l10n.uvIndex),
-              icon: Icons.wb_sunny_outlined,
-              subtitle: Text("${forecast.day.uv}"),
-            ),
+                titleText: l10n.uvIndex,
+                icon: Icons.wb_sunny_outlined,
+                subtitleText: "${forecast.day.uv}"),
             ItemListTile(
-              title: Text(l10n.snow),
+              titleText: l10n.snow,
               icon: Icons.wind_power_outlined,
-              subtitle: Text(
-                l10n.speed(unitSystem, forecast.day.totalSnow),
-              ),
+              subtitleText: l10n.speed(unitSystem, forecast.day.totalSnow),
             ),
             ItemListTile(
-              title: Text(l10n.visibility),
+              titleText: l10n.visibility,
               icon: Icons.visibility_outlined,
-              subtitle: Text(
-                l10n.speed(unitSystem, forecast.day.avgVisibility),
-              ),
+              subtitleText: l10n.speed(unitSystem, forecast.day.avgVisibility),
             ),
           ],
         ),
@@ -115,18 +108,14 @@ class ForecastBody extends HookConsumerWidget {
           gridDelegate: gridDelegate,
           children: [
             ItemListTile(
-              title: Text(l10n.sunrise),
+              titleText: l10n.sunrise,
               icon: Icons.nights_stay_outlined,
-              subtitle: Text(
-                forecast.astro.sunrise.toDateTime().formatHour(),
-              ),
+              subtitleText: forecast.astro.sunrise.toDateTime().formatHour(),
             ),
             ItemListTile(
-              title: Text(l10n.sunset),
+              titleText: l10n.sunset,
               icon: Icons.wb_sunny_outlined,
-              subtitle: Text(
-                forecast.astro.sunset.toDateTime().formatHour(),
-              ),
+              subtitleText: forecast.astro.sunset.toDateTime().formatHour(),
             ),
           ],
         ),
@@ -151,7 +140,7 @@ class HourlyForecastListTile extends StatelessWidget {
     final theme = Theme.of(context);
 
     return DataListTile(
-      title: Text(l10n.hourlyForecast),
+      titleText: l10n.hourlyForecast,
       icon: Icons.watch_later_outlined,
       child: SizedBox(
         height: 110,

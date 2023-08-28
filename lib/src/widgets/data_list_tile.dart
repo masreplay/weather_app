@@ -4,12 +4,12 @@ import 'package:weather_app/src/widgets/flex_padded.dart';
 class DataListTile extends StatelessWidget {
   const DataListTile({
     super.key,
-    required this.title,
+    required this.titleText,
     required this.icon,
     required this.child,
   });
 
-  final Widget title;
+  final String titleText;
 
   final IconData icon;
 
@@ -43,11 +43,12 @@ class DataListTile extends StatelessWidget {
                 child: Icon(icon, color: theme.colorScheme.onPrimary),
               ),
               Expanded(
-                child: DefaultTextStyle(
+                child: Text(
+                  titleText,
                   style: theme.textTheme.titleMedium!.copyWith(
                     color: foregroundColor,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: title,
                 ),
               ),
             ],
@@ -63,13 +64,13 @@ class DataListTile extends StatelessWidget {
 class ItemListTile extends StatelessWidget {
   const ItemListTile({
     super.key,
-    required this.title,
-    required this.subtitle,
+    required this.titleText,
+    required this.subtitleText,
     required this.icon,
   });
 
-  final Widget title;
-  final Widget subtitle;
+  final String titleText;
+  final String subtitleText;
   final IconData icon;
 
   @override
@@ -97,24 +98,28 @@ class ItemListTile extends StatelessWidget {
             ),
             child: Icon(icon, color: theme.colorScheme.onPrimary),
           ),
-          ColumnPadded(
-            gap: 0,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DefaultTextStyle(
-                style: theme.textTheme.titleMedium!.copyWith(
-                  color: foregroundColor,
-                  fontWeight: FontWeight.bold,
+          Expanded(
+            child: ColumnPadded(
+              gap: 0,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  titleText,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleMedium!.copyWith(
+                    color: foregroundColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                child: title,
-              ),
-              DefaultTextStyle(
-                style: theme.textTheme.titleSmall!.copyWith(
-                  color: foregroundColor,
+                Text(
+                  subtitleText,
+                  style: theme.textTheme.titleSmall!.copyWith(
+                    color: foregroundColor,
+                  ),
                 ),
-                child: subtitle,
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
