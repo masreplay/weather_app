@@ -99,7 +99,6 @@ class CurrentDaySection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = forecastProviderProvider;
     final state = ref.watch(provider);
-
     return ClipRRect(
       borderRadius: _expandedBorderRadius,
       child: AnimatedContainer(
@@ -108,6 +107,11 @@ class CurrentDaySection extends ConsumerWidget {
           image: DecorationImage(
             image: ExactAssetImage(
               state.maybeWhen(
+                data: (data) {
+                  return data.current.isDay == 0
+                      ? Assets.hour.night.path
+                      : Assets.hour.day.path;
+                },
                 orElse: () => Assets.hour.night.path,
               ),
             ),
