@@ -2,6 +2,7 @@
 <p align="center">
   <img src="screenshots/logo.svg" width="200" height="200" alt="Weather App Logo">
 </p>
+
 ### The Weather App
 - Please the TODO.md file for task details
 - The project now only tested on Android
