@@ -1,7 +1,7 @@
 name: weather_app
 description: A Flutter Weather app using best practices by @masreplay
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/masreplay/weather_app
 
 environment:
