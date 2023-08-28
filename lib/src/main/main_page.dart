@@ -94,10 +94,6 @@ class NavigationTabsDelegate extends SliverPersistentHeaderDelegate {
   Widget build(context, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: Theme.of(context).colorScheme.background,
-      padding: const EdgeInsets.symmetric(
-        horizontal: Insets.medium,
-        vertical: Insets.small,
-      ),
       child: RowPadded(
         gap: Insets.medium,
         children: List.generate(routes.length, (index) {

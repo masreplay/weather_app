@@ -27,9 +27,9 @@
     "percent": "{value}%",
     "uvIndex": "مؤشر الأشعة فوق البنفسجية",
     "pressure": "الضغط",
-    "speedUnit": "{value} {unit, select, metric{كم/س} imperial{ميل/س} other{كم/س}}",
     "gust": "هبات",
     "visibility": "الرؤية",
-    "pressureUnit": "{value} {unit, select, mb{مب} hPa{هس} other{مب}}",
-    "temperatureUnit": "{value} {unit, select, celsius{س} fahrenheit{ف} other{س}}°"
+    "speedUnit": "{value} {unit, select, metric{كم/س} imperial{ميل/س} other{كم/س}}",
+    "pressureUnit": "{value} {unit, select, metric{مب} imperial{هس} other{مب}}",
+    "temperatureUnit": "{value} {unit, select, metric{س} imperial{ف} other{س}}°"
 }
