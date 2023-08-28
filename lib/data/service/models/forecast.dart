@@ -44,8 +44,8 @@ class Location with _$Location {
     required DateTime localtime,
   }) = _Location;
 
-  String get localTimeFormatted =>
-      "${localtime.format()} ${localtime.formatDOW()}";
+  String getLocalTimeFormatted(String locale) =>
+      "${localtime.format()} ${localtime.formatDOW(locale)}";
 
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);

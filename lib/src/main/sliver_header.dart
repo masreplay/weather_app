@@ -271,7 +271,7 @@ class CurrentWeatherSection extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        data.location.localTimeFormatted,
+                        data.location.getLocalTimeFormatted(l10n.localeName),
                         style: mediumTextStyle,
                       ),
                     ),
