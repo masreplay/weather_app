@@ -33,6 +33,8 @@ flutter build apk
   - https://weatherapp.com/forecast
   - https://weatherapp.com/settings
 
+- lazy loading for the font assets form google fonts
+
 - localization
   - English
   - Arabic
