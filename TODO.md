@@ -36,7 +36,7 @@ Description: Design and develop a weather application that fetches weather data 
 - Write a brief README that explains how to set up and run the app. ✅
 
 **Bonus**
-- Implement location services to allow users to fetch weather data for their current location.
+- Implement location services to allow users to fetch weather data for their current location(not implemented, it's simply could be implemented in the saved_place_provider)
 - Add an option to switch between Celsius and Fahrenheit temperature units. ✅
 - Provide detailed weather information (humidity, wind speed, etc.) in a separate screen. ✅
 - Enhance the UI with animations and transitions.✅❌

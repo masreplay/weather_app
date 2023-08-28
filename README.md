@@ -1,6 +1,17 @@
+
+<!-- screenshots/logo.svg -->
+<p align="center">
+  <img src="screenshots/logo.svg" width="200" height="200" alt="Weather App Logo">
+</p>
+
+
+
+
 ### The Weather App
 - Please the TODO.md file for task details
 - The project now only tested on Android
+
+<img src="screenshots/today.png" height="200">
 
 ### Features
 - Riverpod for state management
@@ -23,9 +34,6 @@ flutter run
 flutter build apk
 ```
 
-## Screenshots
-- Check the screenshots folder for the screenshots
-
 ## Extra bonus
 - Support deep linking
   - https://weatherapp.com/today
@@ -33,9 +41,24 @@ flutter build apk
   - https://weatherapp.com/forecast
   - https://weatherapp.com/settings
 
-- lazy loading for the font assets form google fonts
+- lazy loading for the font assets from google fonts
 
 - localization
   - English
   - Arabic
-- Change Android app icon, app Name
+Change the Android app icon, app Name
+
+
+# screenshots
+___
+|                    |                                                             |
+| :----------------: | :---------------------------------------------------------: |
+| forecast-collapsed | <img src="screenshots/forecast-collapsed.png" height="200"> |
+|   forecast-dark    |   <img src="screenshots/forecast-dark.png" height="200">    |
+|      forecast      |      <img src="screenshots/forecast.png" height="200">      |
+|       search       |       <img src="screenshots/search.png" height="200">       |
+|      settings      |      <img src="screenshots/settings.png" height="200">      |
+|   today-celsius    |   <img src="screenshots/today-celsius.png" height="200">    |
+|    today-loadin    |    <img src="screenshots/today-loadin.png" height="200">    |
+|       today        |       <img src="screenshots/today.png" height="200">        |
+|      tomorrow      |      <img src="screenshots/tomorrow.png" height="200">      |
