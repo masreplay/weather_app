@@ -1,12 +1,7 @@
 
-<!-- screenshots/logo.svg -->
 <p align="center">
   <img src="screenshots/logo.svg" width="200" height="200" alt="Weather App Logo">
 </p>
-
-
-
-
 ### The Weather App
 - Please the TODO.md file for task details
 - The project now only tested on Android
@@ -18,7 +13,7 @@
 - Retrofit built on Dio for network calls
 - Shared preferences for data persistence
 - flutter_localization for localization
-- fluttergen for assets safe access
+- flutter_gen for assets safe access
 - auto_router for navigation instead of using go_router because of safe args and type safety
 - hooks for syntax sugar and less boilerplate of value notifier
 - gap for spacing
@@ -41,7 +36,7 @@ flutter build apk
   - https://weatherapp.com/forecast
   - https://weatherapp.com/settings
 
-- lazy loading for the font assets from google fonts
+- lazy loading for the font assets from Google fonts
 
 - localization
   - English
