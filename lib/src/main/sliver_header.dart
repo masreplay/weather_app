@@ -108,7 +108,7 @@ class CurrentDaySection extends ConsumerWidget {
           image: DecorationImage(
             image: ExactAssetImage(
               state.maybeWhen(
-                orElse: () => Assets.hour.day.path,
+                orElse: () => Assets.hour.night.path,
               ),
             ),
             fit: BoxFit.cover,
